@@ -1,0 +1,25 @@
+{
+  "name": "sounder-app",
+  "version": "1.0.0",
+  "description": "A web application to discover new songs and create new playlists using the Spotify Web API.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrochiossi/sounder-app.git"
+  },
+  "keywords": [
+    "playlist",
+    "songs",
+    "spotify",
+    "web"
+  ],
+  "author": "Pedro M. Chiossi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedrochiossi/sounder-app/issues"
+  },
+  "homepage": "https://github.com/pedrochiossi/sounder-app#readme"
+}
