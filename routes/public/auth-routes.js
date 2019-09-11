@@ -33,6 +33,7 @@ passport.use(
 
       process.nextTick(() => {
         spotifyApi.setAccessToken(accessToken);
+
         return done(null, profile);
       });
     },
@@ -45,6 +46,7 @@ router.use(passport.session());
 
 
 router.get('/private/discovery/', (req, res) => {
+
   res.render('private/discovery/index', { user: req.user });
 });
 
@@ -63,26 +65,40 @@ router.get(
   '/callback',
   passport.authenticate('spotify', { failureRedirect: '/' }),
   (req, res) => {
+    console.log('usuario logado na callback: ', req.user);
+    console.log('usuario logado ID: ', req.user.id);
+    console.log('usuario logado Display Name: ', req.user.displayName);
+    console.log('usuario logado Photos: ', req.user.photos[0]);
+    console.log('usuario logado email: ', req.user.emails[0].value);
+
+    const newUser = new User({ name, email, password: hash });
+    newUser.save();
+
     res.redirect('/private/discovery/');
   },
 );
 
-// router.get('/mytracks', (req, res) => {
-//   spotifyApi.getMySavedTracks({
-//     limit: 50,
-//     offset: 0,
-//     market: 'BR',
-//   })
-//     .then((tracks) => {
-//       console.log('Total: ', tracks.body.total);
+router.get('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/');
+})
 
-//       tracks.body.items.forEach((obj, index) => {
-//         console.log('name: ', obj.track.name, 'index: ', index);
-//       });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+router.get('/mytracks', (req, res) => {
+  spotifyApi.getMySavedTracks({
+    limit: 50,
+    offset: 0,
+    market: 'BR',
+  })
+    .then((tracks) => {
+      console.log('Total: ', tracks.body.total);
+
+      tracks.body.items.forEach((obj, index) => {
+        console.log('name: ', obj.track.name, 'index: ', index);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 module.exports = router;
