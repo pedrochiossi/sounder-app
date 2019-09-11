@@ -23,8 +23,9 @@
     "multer-storage-cloudinary": "^2.2.1",
     "node-sass-middleware": "^0.11.0",
     "passport": "^0.4.0",
-    "serve-favicon": "^2.5.0",
+    "passport-spotify": "^1.1.0",
     "prettyjson": "^1.2.1",
+    "serve-favicon": "^2.5.0",
     "spotify-web-api-node": "^4.0.0"
   }
 }
