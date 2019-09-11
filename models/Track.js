@@ -10,6 +10,7 @@ const trackSchema = new Schema ({
   popularity: Number,
   preview_url: String,
   user: { type: Schema.Types.ObjectId, ref: 'User' },
+  status: { type: String, required: true, enum: ['liked', 'unliked', 'unspecified'] },
 });
 
 const Track = mongoose.model('Track', trackSchema);
