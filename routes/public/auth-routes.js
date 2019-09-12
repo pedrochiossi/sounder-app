@@ -5,7 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const SpotifyWebApi = require('spotify-web-api-node');
 const SpotifyStrategy = require('passport-spotify').Strategy;
-const User = require('../../models/User');
+const { findOrCreateUser } = require('../../controllers/user.controller');
 
 const router = express.Router();
 
@@ -30,12 +30,10 @@ passport.use(
       callbackURL: process.env.CALLBACKURI,
     },
     (accessToken, refreshToken, expires_in, profile, done) => {
-      
       process.nextTick(() => {
         spotifyApi.setAccessToken(accessToken);
 
         return done(null, profile);
-        
       });
     },
   ),
@@ -62,26 +60,7 @@ router.get(
 
 router.get(
   '/fetch-user',
-  passport.authenticate('spotify', { failureRedirect: '/' }), async (req, res) => {
-    const spotifyId = req.user.id;
-    const name = req.user.displayName;
-    const imageURL = req.user.photos[0];
-    const email = req.user.emails[0].value;
-
-    const user = await User.findOne({ spotifyId });
-    if (user) {
-      res.redirect('/private/discovery/');
-      return;
-    }
-
-    try {
-      User.create({ spotifyId, name, imageURL, email });
-      res.redirect('/private/discovery/');
-    } catch (err) {
-      console.log(err);
-    }
-  },
-);
+  passport.authenticate('spotify', { failureRedirect: '/' }), findOrCreateUser);
 
 router.get('/logout', (req, res) => {
   req.logOut();
