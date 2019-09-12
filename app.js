@@ -13,7 +13,7 @@ const path = require('path');
 const app = express();
 
 mongoose
-  .connect('mongodb://localhost/sounder-app', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })

@@ -5,7 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const SpotifyWebApi = require('spotify-web-api-node');
 const SpotifyStrategy = require('passport-spotify').Strategy;
-const User = require('../../models/Users');
+const User = require('../../models/User');
 
 const router = express.Router();
 
@@ -30,11 +30,12 @@ passport.use(
       callbackURL: process.env.CALLBACKURI,
     },
     (accessToken, refreshToken, expires_in, profile, done) => {
-
+      
       process.nextTick(() => {
         spotifyApi.setAccessToken(accessToken);
 
         return done(null, profile);
+        
       });
     },
   ),
@@ -44,9 +45,7 @@ router.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: tr
 router.use(passport.initialize());
 router.use(passport.session());
 
-
 router.get('/private/discovery/', (req, res) => {
-
   res.render('private/discovery/index', { user: req.user });
 });
 
@@ -62,43 +61,31 @@ router.get(
 );
 
 router.get(
-  '/callback',
-  passport.authenticate('spotify', { failureRedirect: '/' }),
-  (req, res) => {
-    console.log('usuario logado na callback: ', req.user);
-    console.log('usuario logado ID: ', req.user.id);
-    console.log('usuario logado Display Name: ', req.user.displayName);
-    console.log('usuario logado Photos: ', req.user.photos[0]);
-    console.log('usuario logado email: ', req.user.emails[0].value);
+  '/fetch-user',
+  passport.authenticate('spotify', { failureRedirect: '/' }), async (req, res) => {
+    const spotifyId = req.user.id;
+    const name = req.user.displayName;
+    const imageURL = req.user.photos[0];
+    const email = req.user.emails[0].value;
 
-    const newUser = new User({ name, email, password: hash });
-    newUser.save();
+    const user = await User.findOne({ spotifyId });
+    if (user) {
+      res.redirect('/private/discovery/');
+      return;
+    }
 
-    res.redirect('/private/discovery/');
+    try {
+      User.create({ spotifyId, name, imageURL, email });
+      res.redirect('/private/discovery/');
+    } catch (err) {
+      console.log(err);
+    }
   },
 );
 
 router.get('/logout', (req, res) => {
   req.logOut();
   res.redirect('/');
-})
-
-router.get('/mytracks', (req, res) => {
-  spotifyApi.getMySavedTracks({
-    limit: 50,
-    offset: 0,
-    market: 'BR',
-  })
-    .then((tracks) => {
-      console.log('Total: ', tracks.body.total);
-
-      tracks.body.items.forEach((obj, index) => {
-        console.log('name: ', obj.track.name, 'index: ', index);
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 });
 
 module.exports = router;
