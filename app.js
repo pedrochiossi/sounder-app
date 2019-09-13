@@ -1,5 +1,6 @@
 require('dotenv').config();
-
+const passport = require('passport');
+const SpotifyStrategy = require('passport-spotify').Strategy;
 const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
@@ -9,11 +10,12 @@ const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const path = require('path');
+const User = require('./models/User');
 
 const app = express();
 
 mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false })
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })
@@ -27,15 +29,60 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
 app.use(session({
   secret: 'basic-auth-secret',
-  cookie: { maxAge: 60000000 },
+  cookie: { maxAge: 360000 },
+  resave: true,
+  saveUninitialized: true,
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60, // 1 day
   }),
 }));
 
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
+});
+
+passport.use(
+  new SpotifyStrategy(
+    {
+      clientID: process.env.APPKEY,
+      clientSecret: process.env.APPSECRET,
+      callbackURL: process.env.CALLBACKURI,
+    },
+    (accessToken, refreshToken, expires_in, profile, done) => {
+      User.findOneAndUpdate({ spotifyId: profile.id }, { access_token: accessToken }, { new: true })
+        .then((user) => {
+          if (user) {
+            done(null, user);
+            return;
+          }
+          User.create({
+            spotifyId: profile.id,
+            name: profile.displayName,
+            imageURL: profile.photos[0],
+            email: profile.emails[0].value,
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          })
+            .then((newUser) => {
+              done(null, newUser);
+            })
+            .catch(err => done(err));
+        })
+        .catch(err => done(err));
+    },
+  ),
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -51,6 +98,6 @@ const index = require('./routes/public/index');
 const authRoutes = require('./routes/public/auth-routes');
 
 app.use('/', index);
-app.use('/', authRoutes);
+app.use('/', authRoutes); 
 
 module.exports = app;

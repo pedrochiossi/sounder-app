@@ -9,6 +9,8 @@ const userSchema = new Schema({
   password: String,
   imageURL: String,
   createdPlaylists: [{ type: Schema.Types.ObjectId, ref: 'Playlist' }],
+  access_token: { type: String, required: true },
+  refresh_token: {type: String, required: true},
 });
 
 const User = mongoose.model('User', userSchema);
