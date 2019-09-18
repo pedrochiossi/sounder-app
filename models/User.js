@@ -7,10 +7,10 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: String,
-  imageURL: String,
+  imageURL: { type: String, default: 'images/avatar.png' },
   createdPlaylists: [{ type: Schema.Types.ObjectId, ref: 'Playlist' }],
   access_token: { type: String, required: true },
-  refresh_token: {type: String, required: true},
+  refresh_token: { type: String, required: true },
 });
 
 const User = mongoose.model('User', userSchema);

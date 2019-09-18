@@ -1,6 +1,10 @@
-<h1>User:</h1>
+
 <div>
-  <p>user name: {{name}} </p>
-  <p>email: {{email}} </p>
-  <p>accessToken: {{access_token}}</p>
+  <h2>track name: {{name}}</h2>
+  {{#each album.images}}
+    <img src="{{this.url}}" height="100" width="100">
+  {{/each}}
+  {{#each artist}}
+    <p>this.name</p>
+  {{/each}}
 </div>
