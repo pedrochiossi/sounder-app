@@ -97,7 +97,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 const index = require('./routes/public/index');
 const authRoutes = require('./routes/public/auth-routes');
-const spotifyRoutes = require('./routes/private/spotify-routes');
+const spotifyRoutes = require('./routes/private/app-routes');
 
 app.use('/', index);
 app.use('/', authRoutes);
