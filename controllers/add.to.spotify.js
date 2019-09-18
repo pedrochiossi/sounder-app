@@ -11,8 +11,12 @@ async function addToSpotify(user, spotifyTracksIdArray) {
   const currentDate = new Date();
   const playlistName = `Sounder-app ${currentDate}`;
 
-  const addPlaylsit = await spotifyApi.createPlaylist(user.spotifyId, playlistName, { public: false });
-  const addTracks = await spotifyApi.addTracksToPlaylist(addPlaylsit.body.id, spotifyTracksIdArray);
+  try {
+    const addPlaylsit = await spotifyApi.createPlaylist(user.spotifyId, playlistName, { public: false });
+    const addTracks = await spotifyApi.addTracksToPlaylist(addPlaylsit.body.id, spotifyTracksIdArray);
+  } catch (err) {
+    console.log('playlist or track creating error: ', err);
+  }
 
 }
 
