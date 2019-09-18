@@ -24,8 +24,4 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-router.get('/discovery', (req, res) => {
-  res.render('private/discovery/index', req.user);
-});
-
 module.exports = router;

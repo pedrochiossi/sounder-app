@@ -100,4 +100,8 @@ const authRoutes = require('./routes/public/auth-routes');
 app.use('/', index);
 app.use('/', authRoutes); 
 
+const appRoutes = require('./routes/private/app-routes');
+
+app.use('/', appRoutes);
+
 module.exports = app;
