@@ -1,6 +1,5 @@
 const SpotifyWebApi = require('spotify-web-api-node');
 const Track = require('../models/Track');
-const User = require('../models/User');
 const spotifyApi = new SpotifyWebApi({});
 
 
@@ -36,9 +35,9 @@ module.exports = {
         seed_tracks: id,
         min_popularity: 10,
       });
-      console.log(recomendation.body.tracks[0]);
       const contains = await spotifyApi.containsMySavedTracks([recomendation.body.tracks[0].id]);
-      if (!contains.body[0]) {
+      const track = await Track.findOne({ spotify_id: recomendation.body.tracks[0].id });
+      if (!contains.body[0] && !track) {
         return recomendation.body.tracks[0];
       }
       return this.getRandomRecommendation(id);
