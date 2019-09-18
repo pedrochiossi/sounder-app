@@ -32,7 +32,7 @@ app.use(cookieParser());
 
 app.use(session({
   secret: 'basic-auth-secret',
-  cookie: { maxAge: 36000000 },
+  cookie: { maxAge: 3600000 },
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({
