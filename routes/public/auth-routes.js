@@ -1,6 +1,8 @@
 require('dotenv').config();
+
 const express = require('express');
 const passport = require('passport');
+
 const router = express.Router();
 
 router.get(
@@ -17,7 +19,6 @@ router.get('/auth/spotify/callback',
   passport.authenticate('spotify', { failureRedirect: '/' }), (req, res) => {
     res.redirect('/discovery');
   });
-
 
 router.get('/logout', (req, res) => {
   req.logOut();
