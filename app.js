@@ -32,7 +32,7 @@ app.use(cookieParser());
 
 app.use(session({
   secret: 'basic-auth-secret',
-  cookie: { maxAge: 360000 },
+  cookie: { maxAge: 3600000 },
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({
@@ -92,7 +92,7 @@ app.use(require('node-sass-middleware')({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 const index = require('./routes/public/index');
 const authRoutes = require('./routes/public/auth-routes');
