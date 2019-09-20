@@ -37,7 +37,7 @@ module.exports = {
       });
       const contains = await spotifyApi.containsMySavedTracks([recomendation.body.tracks[0].id]);
       const track = await Track.findOne({ spotify_id: recomendation.body.tracks[0].id });
-      if (!contains.body[0] && !track) {
+      if (!contains.body[0] && !track && recomendation.body.tracks[0].preview_url !== null) {
         return recomendation.body.tracks[0];
       }
       return this.getRandomRecommendation(id);
