@@ -8,12 +8,12 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 async function savePlaylistFromSpotify(user, playlist) {
-  const getPlaylistFromSpotify = await spotifyApi.getPlaylist(playlist.body.id);
+  const playlistFromSpotify = await spotifyApi.getPlaylist(playlist.body.id);
 
-  const tracksArr = [];
-  await getPlaylistFromSpotify.body.tracks.items.forEach((trackImgURL, position) => {
+  const imgURLs = [];
+  playlistFromSpotify.body.tracks.items.forEach((trackImgURL, position) => {
     if (position <= 3) {
-      tracksArr.push(trackImgURL.track.album.images[1].url);
+      imgURLs.push(trackImgURL.track.album.images[1].url);
     }
   });
 
@@ -23,11 +23,11 @@ async function savePlaylistFromSpotify(user, playlist) {
   try {
     await Playlist.create({
       tracks: mongoTrackIds,
-      name: getPlaylistFromSpotify.body.name,
+      name: playlistFromSpotify.body.name,
       user: user._id,
       created_at: date,
       spotify_id: playlist.body.id,
-      images: tracksArr,
+      images: imgURLs,
     });
   } catch (err) {
     throw err;
