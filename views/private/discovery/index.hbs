@@ -1,11 +1,12 @@
-
-<div>
-  <h2>track name: {{name}}</h2>
-  {{#each album.images}}
-    <img src="{{this.url}}" height="100" width="100">
-  {{/each}}
-  <audio controls src="{{preview_url}}"></audio>
+<div class="discovery-container">
+  <h4>{{name}}</h4>
   {{#each artists}}
-    <p>{{this.name}}</p>
+    <h5>{{this.name}}<h5>
   {{/each}}
+  <div><img id="album-img" src="{{album.images.0.url}}" height="400" width="400"></div>
+  <div></div><audio controls src="{{preview_url}}"></audio></div>
+  <div class="buttons-container">
+    <button id="dislike-button"><i class="material-icons">clear</i></button>
+    <button id="like-button"><i class="material-icons">done</i></button>
+  </div>
 </div>
