@@ -49,7 +49,7 @@ module.exports = {
   async saveTrack(track, user) {
     const date = new Date();
     try {
-      await Track.create({
+      const newTrack  = await Track.create({
         spotify_id: track.id,
         name: track.name,
         album: track.album,
@@ -60,6 +60,7 @@ module.exports = {
         created_at: date,
       });
       console.log('saved tracks to database!');
+      return newTrack;
     } catch (error) {
       throw error;
     }
