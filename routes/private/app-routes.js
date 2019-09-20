@@ -18,9 +18,9 @@ router.get('/discovery', async (req, res) => {
   }
 });
 
-router.get('/add-to-spotify', (req, res) => {
-  // aguardando função spotifyTracksIdArray do Pedro
-  const spotifyTracksIdArray = ['spotify:track:4iV5W9uYEdYUVa79Axb7Rh', 'spotify:track:1301WleyT98MSxVHPZCA6M'];
+router.get('/add-to-spotify', async (req, res) => {
+  const tracksId = await trackController.getLikedSpotifyTrackIds();
+  const spotifyTracksIdArray = tracksId;
   addToSpotify(req.user, spotifyTracksIdArray);
   res.render('private/discovery/index', req.user);
 });

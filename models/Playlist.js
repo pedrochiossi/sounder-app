@@ -10,7 +10,6 @@ const playlistSchema = new Schema({
   spotify_id: String,
   images: [String],
 });
-
 const Playlist = mongoose.model('Playlist', playlistSchema);
 
 module.exports = Playlist;
