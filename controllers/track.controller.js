@@ -78,7 +78,8 @@ module.exports = {
   async getLikedTrackIds() {
     try {
       const likedTracks = await Track.find({ liked: true, inPlaylist: false }, { _id: true });
-      const ids = likedTracks.map(el => el._id);
+      // eslint-disable-next-line no-underscore-dangle
+      const ids = likedTracks.map(track => track._id);
       return ids;
     } catch (error) {
       throw error;
