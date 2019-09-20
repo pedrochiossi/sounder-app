@@ -8,7 +8,6 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   password: String,
   imageURL: { type: String, default: 'images/avatar.png' },
-  createdPlaylists: [{ type: Schema.Types.ObjectId, ref: 'Playlist' }],
   access_token: { type: String, required: true },
   refresh_token: { type: String, required: true },
 });
