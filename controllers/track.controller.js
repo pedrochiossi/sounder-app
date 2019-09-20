@@ -67,7 +67,7 @@ module.exports = {
 
   async getLikedSpotifyTrackIds() {
     try {
-      const likedTracks = await Track.find({ liked: false, inPlaylist: false }, { spotify_id: true });
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false }, { spotify_id: true });
       const spotifyIds = likedTracks.map(track => `spotify:track:${track.spotify_id}`);
       return spotifyIds;
     } catch (error) {
@@ -77,7 +77,7 @@ module.exports = {
 
   async getLikedTrackIds() {
     try {
-      const likedTracks = await Track.find({ liked: false, inPlaylist: false }, { _id: true });
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false }, { _id: true });
       const ids = likedTracks.map(el => el._id);
       return ids;
     } catch (error) {
