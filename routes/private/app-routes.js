@@ -20,7 +20,7 @@ router.get('/discovery', async (req, res) => {
 
 router.get('/add-to-spotify', async (req, res) => {
   const tracksId = await trackController.getLikedSpotifyTrackIds();
-  const spotifyTracksIdArray = tracksId;  
+  const spotifyTracksIdArray = tracksId;
   addToSpotify(req.user, spotifyTracksIdArray);
   res.render('private/discovery/index', req.user);
 });
