@@ -3,9 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  if (req.user) {
+  if (req.isAuthenticated()) {
     res.redirect('/discovery');
-    return;
   }
   res.render('public/index');
 });
