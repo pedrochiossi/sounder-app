@@ -29,8 +29,13 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
 router.post('/discovery/set-liked', ensureAuthenticated, async (req, res) => {
   try {
     const { liked, id } = req.body;
-    const updated = await trackController.updateLiked(id, Boolean(liked));
-    console.log(updated);
+    if (liked === 'true') {
+      const updated = await trackController.updateLiked(id, true);
+      console.log(updated);
+    } else {
+      const updated = await trackController.updateLiked(id, false);
+      console.log(updated);
+    }
     res.redirect('/discovery');
   } catch (error) {
     console.log(error);

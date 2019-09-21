@@ -87,7 +87,7 @@ module.exports = {
     }
   },
 
-  async updateLiked(id, liked) {
+  async updateLiked(id, liked) { 
     try {
       const track = await Track.findOneAndUpdate({ _id: id }, { liked });
       return `track: ${track.name} updated successfully!`;
