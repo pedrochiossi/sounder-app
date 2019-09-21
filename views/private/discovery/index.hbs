@@ -1,12 +1,22 @@
 <div class="discovery-container">
-  <h4>{{name}}</h4>
-  {{#each artists}}
-    <h5>{{this.name}}<h5>
-  {{/each}}
-  <div><img id="album-img" src="{{album.images.0.url}}" height="400" width="400"></div>
-  <div></div><audio controls src="{{preview_url}}"></audio></div>
+  <div class="image-container">
+    <img id="album-img" src="{{album.images.0.url}}" height="400" width="400" onclick="playPause()">
+    <div class="centered"><i id="play-icon" class="material-icons md-100 md-light hidden">play_arrow</i></div>
+    <div class="centered"><i id="pause-icon" class="material-icons md-100 md-light hidden">pause</i></div>
+  </div>
+  <p>{{name}} -- {{artists.0.name}}</p>
+  <div>
+    <audio id="song" src="{{preview_url}}"></audio>
+  </div>
   <div class="buttons-container">
-    <button id="dislike-button"><i class="material-icons">clear</i></button>
-    <button id="like-button"><i class="material-icons">done</i></button>
+  <form action="/discovery/set-liked" method="POST">
+    <input type="hidden" name="id" value="{{_id}}">
+    <button type="submit" name="liked" value="false" id="dislike-button">
+      <i class="material-icons md-36">clear</i>
+    </button>
+    <button type="submit" name="liked" value="true" id="like-button">
+      <i class="material-icons md-36">done</i>
+    </button>
+  </form>
   </div>
 </div>
