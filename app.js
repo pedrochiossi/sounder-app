@@ -42,11 +42,13 @@ app.use(session({
 }));
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user._id);
 });
 
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
 });
 
 passport.use(
@@ -98,7 +100,8 @@ const index = require('./routes/public/index');
 const authRoutes = require('./routes/public/auth-routes');
 
 app.use('/', index);
-app.use('/', authRoutes); 
+app.use('/', authRoutes);
+
 
 const appRoutes = require('./routes/private/app-routes');
 
