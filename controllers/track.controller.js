@@ -21,14 +21,14 @@ module.exports = {
   async getRandomTrackId(total) {
     try {
       const randomOffset = Math.floor(Math.random() * total);
-      const randomTrack = await spotifyApi.getMySavedTracks({ limit: 1, randomOffset });
+      const randomTrack = await spotifyApi.getMySavedTracks({ limit: 1, offset: randomOffset });
       return randomTrack.body.items[0].track.id;
     } catch (error) {
       throw error;
     }
   },
 
-  async getRandomRecommendation(id) {
+  async getRandomRecommendation(id, user) {
     try {
       const recomendation = await spotifyApi.getRecommendations({
         limit: 1,
@@ -36,11 +36,11 @@ module.exports = {
         min_popularity: 10,
       });
       const contains = await spotifyApi.containsMySavedTracks([recomendation.body.tracks[0].id]);
-      const track = await Track.findOne({ spotify_id: recomendation.body.tracks[0].id });
+      const track = await Track.findOne({ spotify_id: recomendation.body.tracks[0].id, user: user._id});
       if (!contains.body[0] && !track && recomendation.body.tracks[0].preview_url !== null) {
         return recomendation.body.tracks[0];
       }
-      return this.getRandomRecommendation(id);
+      return this.getRandomRecommendation(id, user);
     } catch (error) {
       throw error;
     }
@@ -49,7 +49,7 @@ module.exports = {
   async saveTrack(track, user) {
     const date = new Date();
     try {
-      const newTrack  = await Track.create({
+      const newTrack = await Track.create({
         spotify_id: track.id,
         name: track.name,
         album: track.album,
@@ -66,9 +66,9 @@ module.exports = {
     }
   },
 
-  async getLikedSpotifyTrackIds() {
+  async getLikedSpotifyTrackIds(user) {
     try {
-      const likedTracks = await Track.find({ liked: true, inPlaylist: false }, { spotify_id: true });
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id }, { spotify_id: true });
       const spotifyIds = likedTracks.map(track => `spotify:track:${track.spotify_id}`);
       return spotifyIds;
     } catch (error) {
@@ -76,12 +76,21 @@ module.exports = {
     }
   },
 
-  async getLikedTrackIds() {
+  async getLikedTrackIds(user) {
     try {
-      const likedTracks = await Track.find({ liked: true, inPlaylist: false }, { _id: true });
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id}, { _id: true });
       // eslint-disable-next-line no-underscore-dangle
       const ids = likedTracks.map(track => track._id);
       return ids;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async updateLiked(id, liked) {
+    try {
+      const track = await Track.findOneAndUpdate({ _id: id }, { liked });
+      return `track: ${track.name} updated successfully!`;
     } catch (error) {
       throw error;
     }
