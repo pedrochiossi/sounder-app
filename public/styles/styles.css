@@ -1,5 +1,4 @@
 #like-button {
-    margin-top: 30px;
     border: none;
     width: 80px;
     height: 80px;
@@ -9,14 +8,17 @@
 }
 
 #dislike-button {
-    margin-top: 30px;
     border: none;
     width: 80px;
     height: 80px;
     border-radius: 50px;
     background-color: rgb(231, 29, 29);
     color: white;
-    margin-right: 50px;
+    margin-right: 80px;
+}
+
+button {
+    cursor: pointer;
 }
 
 .discovery-container {
@@ -25,6 +27,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 15px;
 }
 
 .buttons-container {
@@ -32,3 +35,25 @@
  justify-content: center;
  align-items: center;
 }
+
+.image-container {
+    position: relative;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#album-img {
+    cursor: pointer;
+}
+.hidden {
+    display: none;
+}
+
+.material-icons.md-36 { font-size: 36px;}
+.material-icons.md-100 { font-size: 100px; }
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
