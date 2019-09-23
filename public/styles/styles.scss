@@ -4,39 +4,53 @@ html, body {
   position: relative;
   height: 100vh;
   width: 100vw;
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+}
 
-.artist, .name {
-  display: block; }
+.artist,.name {
+  display: block;
+}
 
 .song {
   color: white;
   font-size: 16px;
   font-weight: 700;
-  margin: 8px 0; }
+  margin: 8px 0;
+}
 
 .artist {
   color: #999;
   font-size: 12px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+}
 
 #progress {
   width: 100%;
-  background-color: #bababa; }
+  background-color: rgb(186, 186, 186);
+
+}
 
 #progress-bar {
   width: 0%;
   height: .4rem;
-  background-color: dodgerblue; }
-  #progress-bar.play {
+  background-color: dodgerblue;
+
+  &.play {
     animation: progress-bar 30s linear;
-    animation-play-state: paused; }
+    animation-play-state: paused;
+  }
+}
 
 @keyframes progress-bar {
   from {
-    width: 0%; }
+    width: 0%;
+  }
   to {
-    width: 100%; } }
+    width: 100%;
+  }
+}
+
+ 
 
 #like-button {
   border: none;
@@ -62,15 +76,13 @@ button {
   width: 400px;
   margin: 0 auto;
   position: absolute;
-  top: 2rem;
-  right: 0;
-  left: 0;
-  bottom: 2rem;
+  top: 2rem; right: 0; left: 0; bottom: 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px; }
+  padding: 15px; 
+}
 
 .buttons-container {
   display: flex;
@@ -87,7 +99,8 @@ button {
   transform: translate(-50%, -50%); }
 
 #album-img {
-  cursor: pointer; }
+  cursor: pointer;
+ }
 
 .hidden {
   display: none; }
@@ -116,6 +129,6 @@ button {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.6); }
+  background-color: rgba(0, 0, 0, 0.6); 
+}
 
-/*# sourceMappingURL=styles.css.map */
