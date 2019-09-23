@@ -11,13 +11,17 @@ async function savePlaylistFromSpotify(user, playlist) {
   const playlistFromSpotify = await spotifyApi.getPlaylist(playlist.body.id);
 
   const imgURLs = [];
-  playlistFromSpotify.body.tracks.items.forEach((trackImgURL, position) => {
-    if (position <= 3) {
-      imgURLs.push(trackImgURL.track.album.images[1].url);
-    }
-  });
+  const itemsArray = playlistFromSpotify.body.tracks.items;
 
-  const mongoTrackIds = await trackController.getLikedTrackIds();
+  for (let i = 0; i < itemsArray.length; i += 1) {
+    if (i < 4) {
+      imgURLs[i] = itemsArray[i].track.album.images[1].url;
+    } else {
+      break;
+    }
+  }
+
+  const mongoTrackIds = await trackController.getLikedTrackIds(user);
   const date = new Date();
 
   try {
@@ -49,4 +53,7 @@ async function addToSpotify(user, spotifyTracksIdArray) {
   }
 }
 
-module.exports = { addToSpotify };
+module.exports = {
+  addToSpotify,
+  savePlaylistFromSpotify,
+};
