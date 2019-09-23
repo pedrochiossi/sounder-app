@@ -14,14 +14,14 @@ async function savePlaylistFromSpotify(user, playlist) {
   const itemsArray = playlistFromSpotify.body.tracks.items;
 
   for (let i = 0; i < itemsArray.length; i += 1) {
-    if (i < 4 ) {
+    if (i < 4) {
       imgURLs[i] = itemsArray[i].track.album.images[1].url;
     } else {
       break;
     }
   }
 
-  const mongoTrackIds = await trackController.getLikedTrackIds();
+  const mongoTrackIds = await trackController.getLikedTrackIds(user);
   const date = new Date();
 
   try {
