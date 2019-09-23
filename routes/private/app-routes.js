@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const trackController = require('../../controllers/track.controller');
-const { addToSpotify } = require('../../controllers/playlist.controller.js');
+const playlistController = require('../../controllers/playlist.controller.js');
 
 router.get('/discovery', async (req, res) => {
   const { user } = req;
@@ -19,10 +19,13 @@ router.get('/discovery', async (req, res) => {
 });
 
 router.get('/add-to-spotify', async (req, res) => {
-  const tracksId = await trackController.getLikedSpotifyTrackIds();
-  const spotifyTracksIdArray = tracksId;
-  addToSpotify(req.user, spotifyTracksIdArray);
+try {
+  const spotifyTracksIdArray = await trackController.getLikedSpotifyTrackIds(req.user);
+  playlistController.addToSpotify(req.user, spotifyTracksIdArray);
   res.render('private/discovery/index', req.user);
+} catch (err) {
+  throw (err);
+}
 });
 
 module.exports = router;
