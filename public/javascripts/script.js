@@ -1,12 +1,12 @@
-
 const song = document.getElementById('song');
 const playIcon = document.getElementById('play-icon');
 const pauseIcon = document.getElementById('pause-icon');
 const background = document.getElementById('bg-before');
-const albumImg = document.getElementById('album-img').getAttribute('src');
+const albumImg = document.getElementById('album-img');
 const progressBar = document.getElementById('progress-bar');
 progressBar.classList.add('play');
-background.style.background = `url(${albumImg}) 0 / cover fixed`;
+background.style.background = `url(${albumImg.getAttribute('src')}) 0 / cover fixed`;
+
 
 song.onended = () => {
   progressBar.classList.remove('play');
