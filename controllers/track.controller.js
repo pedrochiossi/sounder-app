@@ -1,5 +1,6 @@
 const SpotifyWebApi = require('spotify-web-api-node');
 const Track = require('../models/Track');
+
 const spotifyApi = new SpotifyWebApi({});
 
 
@@ -36,7 +37,7 @@ module.exports = {
         min_popularity: 10,
       });
       const contains = await spotifyApi.containsMySavedTracks([recomendation.body.tracks[0].id]);
-      const track = await Track.findOne({ spotify_id: recomendation.body.tracks[0].id, user: user._id});
+      const track = await Track.findOne({ spotify_id: recomendation.body.tracks[0].id, user: user._id });
       if (!contains.body[0] && !track && recomendation.body.tracks[0].preview_url !== null) {
         return recomendation.body.tracks[0];
       }
@@ -78,7 +79,7 @@ module.exports = {
 
   async getLikedTrackIds(user) {
     try {
-      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id}, { _id: true });
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id }, { _id: true });
       // eslint-disable-next-line no-underscore-dangle
       const ids = likedTracks.map(track => track._id);
       return ids;
@@ -87,10 +88,18 @@ module.exports = {
     }
   },
 
-  async updateLiked(id, liked) { 
+  async updateLiked(id, liked) {
     try {
       const track = await Track.findOneAndUpdate({ _id: id }, { liked });
       return `track: ${track.name} updated successfully!`;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async updateInPlaylist(ids, inPlaylist) {
+    try {
+      await Track.updateMany({ _id: ids }, { inPlaylist });
     } catch (error) {
       throw error;
     }
