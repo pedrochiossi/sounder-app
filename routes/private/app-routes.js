@@ -20,7 +20,7 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
     const randomId = await trackController.getRandomTrackId(total);
     const recommendation = await trackController.getRandomRecommendation(randomId, user);
     const newTrack = await trackController.saveTrack(recommendation, user);
-    res.render('private/discovery/index', newTrack);
+    res.render('private/discovery/index', { newTrack, user });
   } catch (err) {
     console.log(err);
   }

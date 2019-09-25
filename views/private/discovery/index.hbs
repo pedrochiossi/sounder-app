@@ -4,19 +4,19 @@
 </div>
 <div class="discovery-container">
   <div class="image-container">
-    <img id="album-img" src="{{album.images.0.url}}" height="400" width="400" onclick="playPause()">
+    <img id="album-img" src="{{newTrack.album.images.0.url}}" height="400" width="400" onclick="playPause()">
     <div class="centered"><i id="play-icon" class="material-icons md-100 md-light hidden">play_arrow</i></div>
     <div class="centered"><i id="pause-icon" class="material-icons md-100 md-light hidden">pause</i></div>
   </div>
   <div id="progress">
     <div id="progress-bar"></div>
   </div>
-  <span class="song">{{name}}</span>
-  <span class="artist">{{artists.0.name}}</span>
-  <div><audio id="song" src="{{preview_url}}"></audio></div>
+  <span class="song">{{newTrack.name}}</span>
+  <span class="artist">{{newTrack.artists.0.name}}</span>
+  <div><audio id="song" src="{{newTrack.preview_url}}"></audio></div>
   <div class="buttons-container">
     <form action="/discovery/set-liked" method="POST">
-      <input type="hidden" name="id" value="{{_id}}">
+      <input type="hidden" name="id" value="{{newTrack._id}}">
       <button type="submit" name="liked" value="false" id="dislike-button">
         <i class="material-icons md-36">clear</i>
       </button>
