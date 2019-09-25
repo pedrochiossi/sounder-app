@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:100,300,700');
+
 html, body {
   margin: 0;
   padding: 0;
@@ -130,3 +132,145 @@ button {
   background-color: rgba(0, 0, 0, 0.6); 
 }
 
+.home-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 50px 20px;
+  }
+
+  .info-wrap h1 {
+    font-size: 62px;
+  }
+
+  .info-wrap{
+    display: block;
+    width: 500px;
+  }
+
+.img-wrap {
+  background-color: #00B172;
+  padding: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+}
+
+.btn-section {
+  display: flex;
+  flex-direction: row;
+}
+.home-btn a {
+  background-color: #00B172;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  position: relative;
+  color: white;
+  padding: 20px;
+  font-size: 1.2em;
+  text-decoration: none;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 250px
+}
+
+.home-btn a:hover{
+  background-color: rgb(1, 155, 101);
+}
+.home-btn a:active{
+  box-shadow: none;
+}
+
+.open-btn a {
+  background-color: #00B172;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  position: relative;
+  color: white;
+  padding: 5px;
+  font-size: 0.7em;
+  text-decoration: none;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 120px
+}
+
+.open-btn a:hover{
+  background-color: rgb(1, 155, 101);
+}
+.open-btn a:active{
+  box-shadow: none;
+}
+
+.del-btn a {
+  background-color: red;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  position: relative;
+  color: white;
+  padding: 5px;
+  font-size: 0.7em;
+  text-decoration: none;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  width: 80px
+}
+
+.del-btn a:hover{
+  background-color: darkred;
+}
+.del-btn a:active{
+  box-shadow: none;
+}
+
+.playlist-cover {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 80px;
+  height: 80px;
+  border: 1px solid lightgrey;
+  margin-right: 20px;
+  }
+
+ 
+
+  .playlists-items {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+  }
+.playlists-container {
+  margin: 0 auto;
+  width: 800px;
+}
+  li {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    margin: 30px 0;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.19);
+  }
+
+  .playlists-section {
+    display: block;
+    width: 420px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .playlists-section h2 {
+    color: #00B172;
+    font-size: 2.5em;
+    text-align: center;
+  }

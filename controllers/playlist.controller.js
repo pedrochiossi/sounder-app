@@ -11,13 +11,17 @@ async function savePlaylistFromSpotify(user, playlist) {
   const playlistFromSpotify = await spotifyApi.getPlaylist(playlist.body.id);
 
   const imgURLs = [];
-  playlistFromSpotify.body.tracks.items.forEach((trackImgURL, position) => {
-    if (position <= 3) {
-      imgURLs.push(trackImgURL.track.album.images[1].url);
-    }
-  });
+  const itemsArray = playlistFromSpotify.body.tracks.items;
 
-  const mongoTrackIds = await trackController.getLikedTrackIds();
+  for (let i = 0; i < itemsArray.length; i += 1) {
+    if (i < 4) {
+      imgURLs[i] = itemsArray[i].track.album.images[1].url;
+    } else {
+      break;
+    }
+  }
+
+  const mongoTrackIds = await trackController.getLikedTrackIds(user);
   const date = new Date();
 
   try {
@@ -32,6 +36,8 @@ async function savePlaylistFromSpotify(user, playlist) {
   } catch (err) {
     throw err;
   }
+
+  await trackController.updateInPlaylist(mongoTrackIds, true);
 }
 
 async function addToSpotify(user, spotifyTracksIdArray) {
@@ -49,4 +55,27 @@ async function addToSpotify(user, spotifyTracksIdArray) {
   }
 }
 
-module.exports = { addToSpotify };
+async function displayPlaylists(user) {
+  try {
+    const playlist = await Playlist.find({ user: user._id }).sort({ created_at: -1 });
+    return playlist;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function removePlaylistAndUpdate(id, user) {
+  try {
+    const updatedPlaylist = await Playlist.findOneAndRemove({_id: id});
+    return updatedPlaylist;
+  } catch (err) {
+    throw err;
+  }
+}
+
+module.exports = {
+  addToSpotify,
+  savePlaylistFromSpotify,
+  displayPlaylists,
+  removePlaylistAndUpdate,
+};
