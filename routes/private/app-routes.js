@@ -20,7 +20,7 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
     const randomId = await trackController.getRandomTrackId(total);
     const recommendation = await trackController.getRandomRecommendation(randomId, user);
     const newTrack = await trackController.saveTrack(recommendation, user);
-    res.render('private/discovery/index', newTrack);
+    res.render('private/discovery/index', { newTrack, user });
   } catch (err) {
     console.log(err);
   }
@@ -30,7 +30,7 @@ router.get('/add-to-spotify', ensureAuthenticated, async (req, res) => {
   try {
     const spotifyTracksIdArray = await trackController.getLikedSpotifyTrackIds(req.user);
     playlistController.addToSpotify(req.user, spotifyTracksIdArray);
-    res.render('private/discovery/index', req.user);
+    res.redirect('/playlists');
   } catch (err) {
     throw (err);
   }
@@ -54,7 +54,8 @@ router.post('/discovery/set-liked', ensureAuthenticated, async (req, res) => {
 
 router.get('/playlists', ensureAuthenticated, async (req, res) => {
   const plalistInfo = await playlistController.displayPlaylists(req.user);
-  res.render('private/playlist/index', { playlists: plalistInfo });
+  console.log(req.user)
+  res.render('private/playlist/index', { playlists: plalistInfo, user: req.user });
 })
 
 router.get('/delete/playlist/:playlistId', ensureAuthenticated, async (req, res) => {
