@@ -1,33 +1,36 @@
-<div class="playlists-section">
-<h2>Saved Playlists</h2>
-<p>Checkout all playlists created with Sounder!</p>
-</div>
+<section class="bg-dark">
+  <div class="playlists-section">
+    <h2>Saved Playlists</h2>
+    <p>Checkout all playlists created with Sounder!</p>
+  </div>
 
-<ul class="playlists-container">
+  <ul class="playlists-container">
     {{#each playlists}}
-  <li class="playlists-items">
-    
-    <div class="cover-container">
-      <div class="playlist-cover">
-        {{#each this.images}}
-        <img src="{{this}}" width="40px" height="40px"/>
-        {{/each}}
+    <li class="playlists-items">
+
+      <div class="cover-container">
+        <div class="playlist-cover">
+          {{#each this.images}}
+          <img src="{{this}}" width="40px" height="40px" />
+          {{/each}}
+        </div>
       </div>
-    </div>
-    
-    <div> 
-      <h3>{{this.name}}</h3>
-    
+
+      <div>
+        <h3>{{this.name}}</h3>
+
         <div class="btn-section">
           <div class="del-btn">
             <a href="/delete/playlist/{{_id}}"><i class="material-icons md-18">delete_forever</i> Delete</a>
-           </div>
+          </div>
           <div class="open-btn">
-             <a href="https://open.spotify.com/playlist/{{spotify_id}}" target="_blank"><i class="material-icons md-18">play_circle_outline</i> Open in Spotify</a>
-           </div>
+            <a href="https://open.spotify.com/playlist/{{spotify_id}}" target="_blank"><i
+                class="material-icons md-18">play_circle_outline</i> Open in Spotify</a>
+          </div>
         </div>
-    </div>
-    
+      </div>
+
     </li>
     {{/each}}
-    </ul>
+  </ul>
+</section>

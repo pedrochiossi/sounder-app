@@ -1,13 +1,35 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:100,300,700");
-html, body {
+/*
+Color pattern
+
+deepBlue: #252B34
+skyBlue: #14BEF0
+pink-red: #B82050
+
+red: #e71d1d
+darkred: #c40d0d
+
+green: #1db954
+darkgreen: #109b41
+
+*/
+* {
+  padding: 0;
+  margin: 0; }
+
+html,
+body {
   margin: 0;
   padding: 0;
   position: relative;
   height: 100vh;
   width: 100vw;
-  font-family: 'Roboto', sans-serif; }
+  font-family: "Roboto", sans-serif; }
 
-.artist, .name {
+.overflow-hidden {
+  overflow: hidden; }
+
+.artist,
+.name {
   display: block; }
 
 .song {
@@ -63,7 +85,7 @@ button {
   width: 400px;
   margin: 0 auto;
   position: absolute;
-  top: 2rem;
+  top: 4rem;
   right: 0;
   left: 0;
   bottom: 2rem;
@@ -103,17 +125,14 @@ button {
   color: white; }
 
 #bg-before {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  box-shadow: inset 0 0 100px #000;
-  filter: blur(15px); }
+  height: 100vh;
+  box-shadow: inset 0 0 200px #000;
+  filter: blur(15px); 
+}
 
 #bg {
   position: fixed;
-  top: 0;
+  top: 60px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -133,16 +152,18 @@ button {
   width: 500px; }
 
 .img-wrap {
-  background-color: #00B172;
-  padding: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+  padding: 20px;
+  border: 10px solid #B82050;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9), 0 6px 6px rgba(0, 0, 0, 0.9); }
 
 .btn-section {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 14px 0; }
 
 .home-btn a {
-  background-color: #00B172;
+  background-color: #1db954;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
   position: relative;
   color: white;
@@ -157,13 +178,13 @@ button {
   width: 250px; }
 
 .home-btn a:hover {
-  background-color: #019b65; }
+  background-color: #109b41; }
 
 .home-btn a:active {
   box-shadow: none; }
 
 .open-btn a {
-  background-color: #00B172;
+  background-color: #00b172;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
   position: relative;
   color: white;
@@ -184,7 +205,7 @@ button {
   box-shadow: none; }
 
 .del-btn a {
-  background-color: red;
+  background-color: #e71d1d;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
   position: relative;
   color: white;
@@ -200,7 +221,7 @@ button {
   width: 80px; }
 
 .del-btn a:hover {
-  background-color: darkred; }
+  background-color: #c40d0d; }
 
 .del-btn a:active {
   box-shadow: none; }
@@ -219,11 +240,13 @@ button {
 .playlists-items {
   display: flex;
   flex-direction: row;
-  padding: 20px; }
+  padding: 20px;
+  border: 2px solid #B82050; }
 
 .playlists-container {
   margin: 0 auto;
-  width: 800px; }
+  width: 800px;
+  color: white; }
 
 li {
   display: flex;
@@ -238,11 +261,82 @@ li {
   display: block;
   width: 420px;
   margin: 0 auto;
-  text-align: center; }
+  text-align: center;
+  color: white; }
 
 .playlists-section h2 {
-  color: #00B172;
+  color: #14BEF0;
   font-size: 2.5em;
   text-align: center; }
+
+.navbar-container {
+  height: 40px;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+  padding: 10px 50px;
+  z-index: -1; }
+
+.item-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 450px; }
+
+.navbar-container a {
+  text-decoration: none;
+  color: white; }
+
+.navbar-container a:hover {
+  text-decoration: none;
+  color: #14BEF0; }
+
+.list-menu-item a {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.icon-gap {
+  padding: 0 10px; }
+
+.list-menu-item span {
+  text-align: center;
+  background-color: #c40d0d;
+  color: white;
+  border-radius: 50%;
+  height: 18px;
+  width: 12px;
+  padding: 2px 3px; }
+
+.bg-dark {
+  background-color: #252B34;
+  width: 100%;
+  height: 100%;
+  padding: 30px 0; }
+
+.bg-dark h1 {
+  color: #14BEF0;
+  font-size: 3.5em; }
+
+.bg-dark p, h2, h3 {
+  color: white; }
+
+.bg-dark p {
+  padding: 30px 0; }
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 0; }
+
+.list-menu-item img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%; }
 
 /*# sourceMappingURL=styles.css.map */
