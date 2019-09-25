@@ -55,7 +55,7 @@ router.post('/discovery/set-liked', ensureAuthenticated, async (req, res) => {
 router.get('/playlists', ensureAuthenticated, async (req, res) => {
   const plalistInfo = await playlistController.displayPlaylists(req.user);
   console.log(req.user)
-  res.render('private/playlist/index', { playlists: plalistInfo, req.user });
+  res.render('private/playlist/index', { playlists: plalistInfo, user: req.user });
 })
 
 router.get('/delete/playlist/:playlistId', ensureAuthenticated, async (req, res) => {
