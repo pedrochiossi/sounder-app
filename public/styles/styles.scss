@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:100,300,700');
+
 html, body {
   margin: 0;
   padding: 0;
@@ -132,3 +134,47 @@ button {
   background-color: rgba(0, 0, 0, 0.6); 
 }
 
+.home-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 50px 20px;
+  }
+
+  .info-wrap h1 {
+    font-size: 62px;
+  }
+
+  .info-wrap{
+    display: block;
+    width: 500px;
+  }
+
+.img-wrap {
+  background-color: #00B172;
+  padding: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+}
+
+.home-btn a {
+  background-color: #00B172;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+  position: relative;
+  color: white;
+  padding: 20px;
+  font-size: 1.2em;
+  text-decoration: none;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 250px
+}
+
+.home-btn a:hover{
+  background-color: rgb(1, 155, 101);
+}
+.home-btn a:active{
+  box-shadow: none;
+}
