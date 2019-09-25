@@ -36,6 +36,8 @@ async function savePlaylistFromSpotify(user, playlist) {
   } catch (err) {
     throw err;
   }
+
+  await trackController.updateInPlaylist(mongoTrackIds, true);
 }
 
 async function addToSpotify(user, spotifyTracksIdArray) {
@@ -53,7 +55,27 @@ async function addToSpotify(user, spotifyTracksIdArray) {
   }
 }
 
+async function displayPlaylists(user) {
+  try {
+    const playlist = await Playlist.find({ user: user._id }).sort({ created_at: -1 });
+    return playlist;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function removePlaylistAndUpdate(id, user) {
+  try {
+    const updatedPlaylist = await Playlist.findOneAndRemove({_id: id});
+    return updatedPlaylist;
+  } catch (err) {
+    throw err;
+  }
+}
+
 module.exports = {
   addToSpotify,
   savePlaylistFromSpotify,
+  displayPlaylists,
+  removePlaylistAndUpdate,
 };
