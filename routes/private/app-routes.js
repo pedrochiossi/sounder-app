@@ -1,5 +1,5 @@
 const express = require('express');
-
+const colorThief = require('colorthief');
 const router = express.Router();
 const trackController = require('../../controllers/track.controller');
 const playlistController = require('../../controllers/playlist.controller.js');
@@ -20,7 +20,8 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
     const randomId = await trackController.getRandomTrackId(total);
     const recommendation = await trackController.getRandomRecommendation(randomId, user);
     const newTrack = await trackController.saveTrack(recommendation, user);
-    res.render('private/discovery/index', { newTrack, user });
+    const colors = await colorThief.getColor(newTrack.album.images[0].url);
+    res.render('private/discovery/index', { track: newTrack, colors: colors.join(',') });
   } catch (err) {
     console.log(err);
   }

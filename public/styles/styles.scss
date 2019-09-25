@@ -48,12 +48,12 @@ body {
 
 #progress {
   width: 100%;
-  background-color: rgb(186, 186, 186);
+  background-color: #aaa9a9;
 }
 
 #progress-bar {
   width: 0%;
-  height: 0.4rem;
+  height: .6rem
   background-color: dodgerblue;
 
   &.play {
