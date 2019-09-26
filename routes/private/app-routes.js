@@ -65,7 +65,7 @@ router.post('/playlists/delete/:playlistId', ensureAuthenticated, async (req, re
   res.redirect('/playlists');
 });
 
-router.get('tracks/', ensureAuthenticated, async (req, res) => {
+router.get('/tracks', ensureAuthenticated, async (req, res) => {
   try {
     const { likedTracks, imgURLs } = await trackController.getLikedNewTracks(req.user);
   res.render('private/track/index', { tracks: likedTracks, imageURL: imgURLs, user: req.user });

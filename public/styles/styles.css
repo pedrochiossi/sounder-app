@@ -19,7 +19,6 @@ darkgreen: #109b41
 html,
 body {
   position: relative;
-  height: 100vh;
   font-family: "Roboto", sans-serif; }
 
 .overflow-hidden {
