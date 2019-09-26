@@ -10,6 +10,7 @@ const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const path = require('path');
+const hbs = require('hbs');
 const User = require('./models/User');
 
 const app = express();
@@ -90,6 +91,8 @@ app.use(require('node-sass-middleware')({
   dest: path.join(__dirname, 'public'),
   sourceMap: true,
 }));
+
+hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
