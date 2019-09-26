@@ -37,7 +37,7 @@ async function savePlaylistFromSpotify(user, playlist) {
     throw err;
   }
 
-  await trackController.updateInPlaylist(mongoTrackIds, true);
+  await trackController.updateInPlaylist(mongoTrackIds);
 }
 
 async function addToSpotify(user, spotifyTracksIdArray, playlistName) {
@@ -47,26 +47,26 @@ async function addToSpotify(user, spotifyTracksIdArray, playlistName) {
   // const playlistName = `Sounder-app ${currentDate}`;
 
   try {
-    const createPlaylsitInSpotify = await spotifyApi.createPlaylist(user.spotifyId, playlistName, { public: false });
-    await spotifyApi.addTracksToPlaylist(createPlaylsitInSpotify.body.id, spotifyTracksIdArray);
-    await savePlaylistFromSpotify(user, createPlaylsitInSpotify);
+    const playlistInSpotify = await spotifyApi.createPlaylist(user.spotifyId, playlistName, { public: false });
+    await spotifyApi.addTracksToPlaylist(playlistInSpotify.body.id, spotifyTracksIdArray);
+    await savePlaylistFromSpotify(user, playlistInSpotify);
   } catch (err) {
     throw err;
   }
 }
 
-async function displayPlaylists(user) {
+async function getPlaylists(user) {
   try {
-    const playlist = await Playlist.find({ user: user._id }).sort({ created_at: -1 });
-    return playlist;
+    const playlists = await Playlist.find({ user: user._id }).sort({ created_at: -1 });
+    return playlists;
   } catch (err) {
     throw err;
   }
 }
 
-async function removePlaylistAndUpdate(id, user) {
+async function removePlaylist(id) {
   try {
-    const updatedPlaylist = await Playlist.findOneAndRemove({_id: id});
+    const updatedPlaylist = await Playlist.findOneAndRemove({ _id: id });
     return updatedPlaylist;
   } catch (err) {
     throw err;
@@ -76,6 +76,6 @@ async function removePlaylistAndUpdate(id, user) {
 module.exports = {
   addToSpotify,
   savePlaylistFromSpotify,
-  displayPlaylists,
-  removePlaylistAndUpdate,
+  getPlaylists,
+  removePlaylist,
 };

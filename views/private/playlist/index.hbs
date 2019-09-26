@@ -1,7 +1,23 @@
+<nav class="navbar-container">
+		<div class="list-menu-item">
+      <a href="/"><img src="/images/favicon-32x32.png" class="icon-gap">Sounder</a>
+    </div>
+    <div class="item-menu">
+    <div class="list-menu-item">
+      <a href="/playlists"><i class="material-icons md-18 icon-gap">queue_music</i>Playlists</a>
+    </div>
+    <div class="list-menu-item">
+      <a href="/playlists"><i class="material-icons md-18 icon-gap">music_note</i>Liked Tracks</a>
+    </div>
+    <div class="list-menu-item">
+      <a href="#"><img src="{{user.imageURL}}" class="icon-gap" >Profile</a>
+    </div> 
+  </div>
+</nav>
 <section class="bg-dark">
   <div class="title-header">
     <h2>Saved Playlists</h2>
-    <p>Checkout all playlists created with Sounder!</p>
+    <p>Check out all playlists created with Sounder!</p>
   </div>
 
 <div class="playlist-container">
@@ -19,10 +35,9 @@
 
       <div>
         <h3>{{this.name}}</h3>
-
         <div class="btn-section">
           <div class="del-btn">
-            <a href="/delete/playlist/{{_id}}"><i class="material-icons md-18">delete_forever</i> Delete</a>
+            <a href="/playlists/delete/{{_id}}"><i class="material-icons md-18">delete_forever</i> Delete</a>
           </div>
           <div class="open-btn">
             <a href="https://open.spotify.com/playlist/{{spotify_id}}" target="_blank"><i

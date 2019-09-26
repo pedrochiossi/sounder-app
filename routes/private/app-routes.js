@@ -1,8 +1,9 @@
 const express = require('express');
 const colorThief = require('colorthief');
-const router = express.Router();
 const trackController = require('../../controllers/track.controller');
 const playlistController = require('../../controllers/playlist.controller.js');
+
+const router = express.Router();
 
 // eslint-disable-next-line consistent-return
 function ensureAuthenticated(req, res, next) {
@@ -16,10 +17,7 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
   const { user } = req;
   trackController.addAccessToken(user);
   try {
-    const total = await trackController.getTotal();
-    const randomId = await trackController.getRandomTrackId(total);
-    const recommendation = await trackController.getRandomRecommendation(randomId, user);
-    const newTrack = await trackController.saveTrack(recommendation, user);
+    const newTrack = await trackController.getNewTrack(user);
     const colors = await colorThief.getColor(newTrack.album.images[0].url);
     res.render('private/discovery/index', { track: newTrack, colors: colors.join(','), user });
   } catch (err) {
@@ -42,11 +40,9 @@ router.post('/discovery/set-liked', ensureAuthenticated, async (req, res) => {
   try {
     const { liked, id } = req.body;
     if (liked === 'true') {
-      const updated = await trackController.updateLiked(id, true);
-      console.log(updated);
+      await trackController.updateLiked(id, true);
     } else {
-      const updated = await trackController.updateLiked(id, false);
-      console.log(updated);
+      await trackController.updateLiked(id, false);
     }
     res.redirect('/discovery');
   } catch (error) {
@@ -55,19 +51,37 @@ router.post('/discovery/set-liked', ensureAuthenticated, async (req, res) => {
 });
 
 router.get('/playlists', ensureAuthenticated, async (req, res) => {
-  const plalistInfo = await playlistController.displayPlaylists(req.user);
+  const plalistInfo = await playlistController.getPlaylists(req.user);
   res.render('private/playlist/index', { playlists: plalistInfo, user: req.user });
 });
 
-router.get('/delete/playlist/:playlistId', ensureAuthenticated, async (req, res) => {
+router.post('/playlists/delete/:playlistId', ensureAuthenticated, async (req, res) => {
   const id = req.params.playlistId;
-  const playlistUpdated = await playlistController.removePlaylistAndUpdate(id, req.user);
+  try {
+    await playlistController.removePlaylist(id);
+  } catch (error) {
+    console.log(error);
+  }
   res.redirect('/playlists');
 });
 
-router.get('/tracks', ensureAuthenticated, async (req, res) => {
-  const { likedTracks, imgURLs } = await trackController.getLikedNewTracks(req.user);
+router.get('tracks/', ensureAuthenticated, async (req, res) => {
+  try {
+    const { likedTracks, imgURLs } = await trackController.getLikedNewTracks(req.user);
   res.render('private/track/index', { tracks: likedTracks, imageURL: imgURLs, user: req.user });
+  } catch (error) {
+    console.log(error);
+  }
 });
+
+router.post('tracks/add-to-spotify', ensureAuthenticated, async (req, res) => {
+  const { spotifyId } = req.body;
+  try {
+    trackController.addTrackToSpotify([spotifyId]);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 
 module.exports = router;

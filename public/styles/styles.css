@@ -19,6 +19,7 @@ darkgreen: #109b41
 html,
 body {
   position: relative;
+  height: 100vh;
   font-family: "Roboto", sans-serif; }
 
 .overflow-hidden {
@@ -45,8 +46,7 @@ body {
 
 #progress-bar {
   width: 0%;
-  height: .6rem;
-  background-color: dodgerblue; }
+  height: .6rem; }
   #progress-bar.play {
     animation: progress-bar 30s linear;
     animation-play-state: paused; }
@@ -58,20 +58,10 @@ body {
     width: 100%; } }
 
 #like-button {
-  border: none;
-  width: 80px;
-  height: 80px;
-  border-radius: 50px;
-  background-color: #0dd30d;
-  color: white; }
+  background-color: #0dd30d; }
 
 #dislike-button {
-  border: none;
-  width: 80px;
-  height: 80px;
-  border-radius: 50px;
   background-color: #e71d1d;
-  color: white;
   margin-right: 80px; }
 
 button {
@@ -95,6 +85,21 @@ button {
   display: flex;
   justify-content: center;
   align-items: center; }
+
+.buttons-container button {
+  border: none;
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  color: white; }
+  .buttons-container button:focus {
+    outline-style: none; }
+  .buttons-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 8px #3c3c3c; }
+  .buttons-container button:active {
+    box-shadow: 0 6px 4px #3c3c3c;
+    transform: scale(0.97); }
 
 .image-container {
   position: relative; }
@@ -126,7 +131,6 @@ button {
   right: 0;
   bottom: 0;
   left: 0;
-  background-clip: border-box;
   box-shadow: inset 0 0 200px #000;
   filter: blur(15px); }
 
@@ -152,9 +156,10 @@ button {
   width: 500px; }
 
 .img-wrap {
-  padding: 20px;
-  border: 10px solid #B82050;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9), 0 6px 6px rgba(0, 0, 0, 0.9); }
+  padding: 10px;
+  border: 5px solid #B82050;
+  border-radius: 18px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 6px 6px rgba(0, 0, 0, 0.4); }
 
 .btn-section {
   display: flex;
@@ -269,16 +274,18 @@ button {
   text-align: center; }
 
 .navbar-container {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 93%;
   height: 40px;
   background-color: black;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   justify-items: center;
   align-items: center;
-  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
   padding: 10px 50px;
-  z-index: -1; }
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75); }
 
 .item-menu {
   display: flex;

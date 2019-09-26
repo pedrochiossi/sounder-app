@@ -68,7 +68,7 @@ module.exports = {
 
   async getLikedSpotifyTrackIds(user) {
     try {
-      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id }, { spotify_id: true });
+      const likedTracks = await this.getLikedTracks(user)
       const spotifyIds = likedTracks.map(track => `spotify:track:${track.spotify_id}`);
       return spotifyIds;
     } catch (error) {
@@ -78,8 +78,7 @@ module.exports = {
 
   async getLikedTrackIds(user) {
     try {
-      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id }, { _id: true });
-      // eslint-disable-next-line no-underscore-dangle
+      const likedTracks = await this.getLikedTracks(user);
       const ids = likedTracks.map(track => track._id);
       return ids;
     } catch (error) {
@@ -96,9 +95,38 @@ module.exports = {
     }
   },
 
-  async updateInPlaylist(ids, inPlaylist) {
+  async updateInPlaylist(ids) {
     try {
-      await Track.updateMany({ _id: ids }, { inPlaylist });
+      await Track.updateMany({ _id: ids }, { inPlaylist: true });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getNewTrack(user) {
+    try {
+      const total = await this.getTotal();
+      const randomId = await this.getRandomTrackId(total);
+      const recommendation = await this.getRandomRecommendation(randomId, user);
+      const newTrack = await this.saveTrack(recommendation, user);
+      return newTrack;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLikedTracks(user) {
+    try {
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id }, { _id: true });
+      return likedTracks;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async addTrackToSpotify(idArray) {
+    try {
+      await spotifyApi.addToMySavedTracks(idArray);
     } catch (error) {
       throw error;
     }
