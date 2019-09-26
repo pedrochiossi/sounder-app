@@ -7,7 +7,7 @@
       <a href="/playlists"><i class="material-icons md-18 icon-gap">queue_music</i>Playlists</a>
     </div>
     <div class="list-menu-item">
-      <a href="/playlists"><i class="material-icons md-18 icon-gap">music_note</i>Liked Tracks</a>
+      <a href="/tracks"><i class="material-icons md-18 icon-gap">music_note</i>Liked Tracks</a>
     </div>
     <div class="list-menu-item">
       <a href="#"><img src="{{user.imageURL}}" class="icon-gap" >Profile</a>
@@ -15,12 +15,13 @@
   </div>
 </nav>
 <section class="bg-dark">
-  <div class="playlists-section">
+  <div class="title-header">
     <h2>Saved Playlists</h2>
     <p>Check out all playlists created with Sounder!</p>
   </div>
 
-  <ul class="playlists-container">
+<div class="playlist-container">
+  <ul>
     {{#each playlists}}
     <li class="playlists-items">
 
@@ -48,4 +49,5 @@
     </li>
     {{/each}}
   </ul>
+  </div>
 </section>

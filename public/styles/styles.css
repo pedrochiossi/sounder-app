@@ -19,7 +19,6 @@ darkgreen: #109b41
 html,
 body {
   position: relative;
-  height: 100vh;
   font-family: "Roboto", sans-serif; }
 
 .overflow-hidden {
@@ -231,6 +230,10 @@ button {
 .del-btn a:active {
   box-shadow: none; }
 
+.playlist-container {
+  margin: 0 auto;
+  width: 40%; }
+
 .playlist-cover {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -245,32 +248,26 @@ button {
 .playlists-items {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
   padding: 20px;
-  border: 2px solid #B82050; }
+  border: 2px solid #B82050;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.19); }
 
 .playlists-container {
   margin: 0 auto;
   width: 800px;
   color: white; }
 
-li {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 2px;
-  margin: 30px 0;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.19); }
-
-.playlists-section {
+.title-header {
   display: block;
   width: 420px;
   margin: 0 auto;
   text-align: center;
   color: white; }
 
-.playlists-section h2 {
-  padding-top: 20px;
+.title-header h2 {
   color: #14BEF0;
   font-size: 2.5em;
   text-align: center; }
@@ -346,5 +343,39 @@ li {
   width: 28px;
   height: 28px;
   border-radius: 50%; }
+
+.tracklist-container {
+  width: 500px;
+  margin: 0 auto; }
+
+.tracklist {
+  display: flex;
+  flex-direction: row; }
+
+.tracklist-items {
+  width: 100%; }
+
+.tracklist-items li {
+  list-style-type: none;
+  padding: 5px;
+  background: #000;
+  margin: 5px 0; }
+
+.tracklist-container label {
+  color: white; }
+
+.tracklist-container input {
+  width: 70%;
+  height: 30px; }
+
+.tracklist-container button {
+  height: 35px;
+  width: 25%;
+  color: white;
+  border: none;
+  background-color: #1db954; }
+
+.tracklist-container form {
+  margin: 20px 0; }
 
 /*# sourceMappingURL=styles.css.map */
