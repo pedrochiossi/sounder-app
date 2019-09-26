@@ -21,16 +21,17 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
     const recommendation = await trackController.getRandomRecommendation(randomId, user);
     const newTrack = await trackController.saveTrack(recommendation, user);
     const colors = await colorThief.getColor(newTrack.album.images[0].url);
-    res.render('private/discovery/index', { track: newTrack, colors: colors.join(',') });
+    res.render('private/discovery/index', { track: newTrack, colors: colors.join(','), user });
   } catch (err) {
     console.log(err);
   }
 });
 
-router.get('/add-to-spotify', ensureAuthenticated, async (req, res) => {
+router.post('/add-to-spotify', ensureAuthenticated, async (req, res) => {
+  const playlistName = req.body.playlist_name;
   try {
     const spotifyTracksIdArray = await trackController.getLikedSpotifyTrackIds(req.user);
-    playlistController.addToSpotify(req.user, spotifyTracksIdArray);
+    await playlistController.addToSpotify(req.user, spotifyTracksIdArray, playlistName);
     res.redirect('/playlists');
   } catch (err) {
     throw (err);
@@ -55,15 +56,18 @@ router.post('/discovery/set-liked', ensureAuthenticated, async (req, res) => {
 
 router.get('/playlists', ensureAuthenticated, async (req, res) => {
   const plalistInfo = await playlistController.displayPlaylists(req.user);
-  console.log(req.user)
   res.render('private/playlist/index', { playlists: plalistInfo, user: req.user });
-})
+});
 
 router.get('/delete/playlist/:playlistId', ensureAuthenticated, async (req, res) => {
   const id = req.params.playlistId;
-  console.log('o que é esse id', id);
   const playlistUpdated = await playlistController.removePlaylistAndUpdate(id, req.user);
   res.redirect('/playlists');
-})
+});
+
+router.get('/tracks', ensureAuthenticated, async (req, res) => {
+  const { likedTracks, imgURLs } = await trackController.getLikedNewTracks(req.user);
+  res.render('private/track/index', { tracks: likedTracks, imageURL: imgURLs, user: req.user });
+});
 
 module.exports = router;

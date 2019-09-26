@@ -40,11 +40,11 @@ async function savePlaylistFromSpotify(user, playlist) {
   await trackController.updateInPlaylist(mongoTrackIds, true);
 }
 
-async function addToSpotify(user, spotifyTracksIdArray) {
+async function addToSpotify(user, spotifyTracksIdArray, playlistName) {
   spotifyApi.setAccessToken(user.access_token);
 
-  const currentDate = new Date();
-  const playlistName = `Sounder-app ${currentDate}`;
+  // const currentDate = new Date();
+  // const playlistName = `Sounder-app ${currentDate}`;
 
   try {
     const createPlaylsitInSpotify = await spotifyApi.createPlaylist(user.spotifyId, playlistName, { public: false });

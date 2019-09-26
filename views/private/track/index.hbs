@@ -1,0 +1,34 @@
+<section class="bg-dark">
+  <div class="title-header">
+    <h2>Liked Tracks</h2>
+    <p>Checkout all your liked tracks with Sounder!</p>
+  </div>
+
+  <div class="tracklist-container">
+    <label>Insert your playlist name bellow</label>
+    <form action="/add-to-spotify" method="POST">
+      <input placeholder="Your playlist name" name="playlist_name" required>
+      <button type="submit" name="create-playlist">Create Playlist</button>
+    </form>
+
+    <div class="tracklist">
+      <div class="cover-container">
+        <div class="playlist-cover">
+          {{#each this.imageURL}}
+          <img src="{{this}}" width="40px" height="40px" />
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="tracklist-items">
+        <ul>
+          {{#each tracks}}
+          <li>
+            <h3>{{this.name}}</h3>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
