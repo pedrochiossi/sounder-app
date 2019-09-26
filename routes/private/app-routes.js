@@ -64,10 +64,10 @@ router.post('/playlists/delete/:playlistId', ensureAuthenticated, async (req, re
   res.redirect('/playlists');
 });
 
-router.get('tracks/', ensureAuthenticated, async (req, res) => {
+router.get('/tracks', ensureAuthenticated, async (req, res) => {
   try {
     const myTracks = await trackController.getLikedTracks(req.user);
-    res.render('/track/index/', { myTracks });
+    res.render('private/track/index', { myTracks, user: req.user });
   } catch (error) {
     console.log(error);
   }
@@ -81,6 +81,5 @@ router.post('tracks/add-to-spotify', ensureAuthenticated, async (req, res) => {
     console.log(error);
   }
 });
-
 
 module.exports = router;

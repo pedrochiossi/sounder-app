@@ -45,7 +45,6 @@ async function addToSpotify(user, spotifyTracksIdArray) {
 
   const currentDate = new Date();
   const playlistName = `Sounder-app ${currentDate}`;
-
   try {
     const playlistInSpotify = await spotifyApi.createPlaylist(user.spotifyId, playlistName, { public: false });
     await spotifyApi.addTracksToPlaylist(playlistInSpotify.body.id, spotifyTracksIdArray);

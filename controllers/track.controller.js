@@ -118,7 +118,7 @@ module.exports = {
 
   async getLikedTracks(user) {
     try {
-      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id }, { _id: true });
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id });
       return likedTracks;
     } catch (error) {
       throw error;

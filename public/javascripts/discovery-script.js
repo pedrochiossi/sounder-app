@@ -4,9 +4,10 @@ const pauseIcon = document.getElementById('pause-icon');
 const background = document.getElementById('bg-before');
 const albumImg = document.getElementById('album-img');
 const progressBar = document.getElementById('progress-bar');
+
+
 progressBar.classList.add('play');
 background.style.background = `url(${albumImg.getAttribute('src')}) 0 / cover fixed`;
-
 
 song.onended = () => {
   progressBar.classList.remove('play');
@@ -15,6 +16,11 @@ song.onended = () => {
   progressBar.style.animationPlayState = 'paused';
 };
 
+
+function showOptions() {
+  const options = document.getElementById('user-options');
+  options.classList.toggle('w3-show');  
+}
 
 function playPause() {
   if (song.paused) {

@@ -1,0 +1,23 @@
+{{> navbar}}
+<div class="bg-dark">
+  <div class="tracks-container">
+    <div id="tracks-header">
+      <input type="text" name="name" id="playlist-name" placeholder="New playlist name">
+      <button type="submit" id="add-playlist-button">Add to Spotify</button>
+    </div>
+    <ul class="w3-ul w3-card-2 w3-small">
+      {{#each myTracks}}
+      <li class="w3-bar">
+        <img src={{this.album.images.0.url}} class=" album w3-bar-item w3-circle" style="width: 50px;">
+        <audio class="audio-preview" src="{{this.preview_url}}"></audio>
+        <div class="w3-bar-item">
+          <span class="w3-large">{{this.name}}</span><br>
+          <span class="artist">{{this.artists.0.name}}</span>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+  
+<script src="javascripts/tracks-script.js"></script>
