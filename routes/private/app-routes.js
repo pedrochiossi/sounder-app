@@ -25,10 +25,11 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
   }
 });
 
-router.get('playlists/add-to-spotify', ensureAuthenticated, async (req, res) => {
+router.post('/add-to-spotify', ensureAuthenticated, async (req, res) => {
+  const playlistName = req.body.playlist_name;
   try {
     const spotifyTracksIdArray = await trackController.getLikedSpotifyTrackIds(req.user);
-    playlistController.addToSpotify(req.user, spotifyTracksIdArray);
+    await playlistController.addToSpotify(req.user, spotifyTracksIdArray, playlistName);
     res.redirect('/playlists');
   } catch (err) {
     throw (err);
@@ -64,10 +65,10 @@ router.post('/playlists/delete/:playlistId', ensureAuthenticated, async (req, re
   res.redirect('/playlists');
 });
 
-router.get('tracks/', ensureAuthenticated, async (req, res) => {
+router.get('/tracks', ensureAuthenticated, async (req, res) => {
   try {
-    const myTracks = await trackController.getLikedTracks(req.user);
-    res.render('/track/index/', { myTracks });
+    const { likedTracks, imgURLs } = await trackController.getLikedNewTracks(req.user);
+  res.render('private/track/index', { tracks: likedTracks, imageURL: imgURLs, user: req.user });
   } catch (error) {
     console.log(error);
   }

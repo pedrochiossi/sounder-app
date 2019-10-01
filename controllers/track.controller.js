@@ -3,7 +3,6 @@ const Track = require('../models/Track');
 
 const spotifyApi = new SpotifyWebApi({});
 
-
 module.exports = {
 
   addAccessToken(user) {
@@ -118,7 +117,7 @@ module.exports = {
 
   async getLikedTracks(user) {
     try {
-      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id }, { _id: true });
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id });
       return likedTracks;
     } catch (error) {
       throw error;
@@ -132,4 +131,24 @@ module.exports = {
       throw error;
     }
   },
+
+  async getLikedNewTracks(user) {
+    try {
+      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id  });
+      const imgURLs = [];
+     
+      for (let i = 0; i < likedTracks.length; i += 1) {
+        if (i < 4) {
+          imgURLs[i] = likedTracks[i].album.images[1].url;
+        } else {
+          break;
+        }
+      };
+      
+      return { likedTracks, imgURLs };
+    } catch (error) {
+      throw error;
+    }
+  },
+
 };
