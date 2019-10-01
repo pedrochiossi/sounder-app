@@ -20,6 +20,7 @@ darkgreen: #109b41
 
 html,
 body {
+  background-color: #000;
   position: relative;
   height: 100vh;
   font-family: "Roboto", sans-serif;
@@ -38,19 +39,19 @@ body {
   color: white;
   font-size: 16px;
   font-weight: 700;
-  margin: 8px 0;
+  margin-top: 8px;
 }
 
 .artist {
   color: #999;
   font-size: 12px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 #progress {
   margin-top: 5px;
   width: 100%;
-  background-color: #aaa9a9;
+  background-color: rgba(rgb(156, 177, 196),.2);
 }
 
 #progress-bar {
@@ -324,7 +325,7 @@ li {
   z-index: 1;
   position: fixed;
   top: 0;
-  width: 93%;
+  width: 95%;
   height: 40px;
   background-color: black;
   display: flex;
@@ -421,12 +422,30 @@ padding: 15px 0;
   border-bottom: 1px solid#3a3939;
 }
 
+.track-info {
+  width: 80% !important;
+}
+
 .w3-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #1b1b1b;
   color: white;
   padding: 0 16px !important;
   &:hover {
     background-color: #3a3939;
+  }
+}
+
+
+
+
+.track-link a {
+  text-decoration: none;
+  margin-right: 15px;
+  &:hover {
+    color: #14BEF0;
   }
 }
 

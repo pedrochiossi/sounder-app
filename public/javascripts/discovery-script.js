@@ -19,7 +19,7 @@ song.onended = () => {
 
 function showOptions() {
   const options = document.getElementById('user-options');
-  options.classList.toggle('w3-show');  
+  options.classList.toggle('w3-show');
 }
 
 function playPause() {

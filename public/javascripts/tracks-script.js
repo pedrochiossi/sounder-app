@@ -5,6 +5,7 @@ albums.forEach((album, i) => {
   album.onmouseenter = () => {
     songs[i].play();
   };
+
   album.onmouseout = () => {
     songs[i].pause();
   };

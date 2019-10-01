@@ -21,6 +21,7 @@ darkgreen: #109b41
 
 html,
 body {
+  background-color: #000;
   position: relative;
   height: 100vh;
   font-family: "Roboto", sans-serif; }
@@ -36,17 +37,17 @@ body {
   color: white;
   font-size: 16px;
   font-weight: 700;
-  margin: 8px 0; }
+  margin-top: 8px; }
 
 .artist {
   color: #999;
   font-size: 12px;
-  margin-bottom: 5px; }
+  margin-bottom: 8px; }
 
 #progress {
   margin-top: 5px;
   width: 100%;
-  background-color: #aaa9a9; }
+  background-color: rgba(156, 177, 196, 0.2); }
 
 #progress-bar {
   width: 0%;
@@ -285,7 +286,7 @@ li {
   z-index: 1;
   position: fixed;
   top: 0;
-  width: 93%;
+  width: 95%;
   height: 40px;
   background-color: black;
   display: flex;
@@ -365,12 +366,24 @@ li {
 .tracks-container li {
   border-bottom: 1px solid #3a3939; }
 
+.track-info {
+  width: 80% !important; }
+
 .w3-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #1b1b1b;
   color: white;
   padding: 0 16px !important; }
   .w3-bar:hover {
     background-color: #3a3939; }
+
+.track-link a {
+  text-decoration: none;
+  margin-right: 15px; }
+  .track-link a:hover {
+    color: #14BEF0; }
 
 #user-options a {
   padding-top: 10px;
