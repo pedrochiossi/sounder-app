@@ -110,4 +110,8 @@ const appRoutes = require('./routes/private/app-routes');
 
 app.use('/', appRoutes);
 
+const apiRoutes = require('./routes/private/app-routes-api');
+
+app.use('/', apiRoutes);
+
 module.exports = app;
