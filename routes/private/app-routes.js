@@ -55,7 +55,7 @@ router.get('/playlists', ensureAuthenticated, async (req, res) => {
   res.render('private/playlist/index', { playlists: plalistInfo, user: req.user });
 });
 
-router.post('/playlists/delete/:playlistId', ensureAuthenticated, async (req, res) => {
+router.get('/playlists/delete/:playlistId', ensureAuthenticated, async (req, res) => {
   const id = req.params.playlistId;
   try {
     await playlistController.removePlaylist(id);
