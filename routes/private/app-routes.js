@@ -17,9 +17,16 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
   const { user } = req;
   trackController.addAccessToken(user);
   try {
-    const newTrack = await trackController.getNewTrack(user);
-    const colors = await colorThief.getColor(newTrack.album.images[0].url);
-    res.render('private/discovery/index', { track: newTrack, colors: colors.join(','), user });
+    const nullTrack = await trackController.getNullTrack(user);
+    console.log(nullTrack);
+    if (nullTrack.length > 0) {
+      const colors = await colorThief.getColor(nullTrack[0].album.images[0].url);
+      res.render('private/discovery/index', { track: nullTrack[0], colors: colors.join(','), user });
+    } else {
+      const newTrack = await trackController.getNewTrack(user);
+      const colors = await colorThief.getColor(newTrack.album.images[0].url);
+      res.render('private/discovery/index', { track: newTrack, colors: colors.join(','), user });
+    }
   } catch (err) {
     console.log(err);
   }
