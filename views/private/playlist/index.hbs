@@ -1,38 +1,39 @@
 {{> navbar}}
 <section class="bg-dark">
-  <div class="title-header">
-    <h2>Saved Playlists</h2>
-    <p>Check out all playlists created with Sounder!</p>
-  </div>
+  <div class="playlists-container">
+    <div class="title-header">
+      <h2>Created Playlists</h2>
+    </div>
 
-<div class="playlist-container">
-  <ul>
-    {{#each playlists}}
-    <li class="playlists-items">
-
-      <div class="cover-container">
-        <div class="playlist-cover">
-          {{#each this.images}}
-          <img src="{{this}}" width="40px" height="40px" />
-          {{/each}}
-        </div>
-      </div>
-
-      <div>
-        <h3>{{this.name}}</h3>
-        <div class="btn-section">
-          <div class="del-btn">
-            <a href="/playlists/delete/{{_id}}"><i class="material-icons md-18">delete_forever</i> Delete</a>
+    <div>
+      <ul class="w3-ul w3-card-2 w3-small">
+        {{#each playlists}}
+        <li class="w3-bar">
+          <div class="w3-bar-item">
+            <div class="playlist-cover">
+              {{#each this.images}}
+              <img src="{{this}}" width="40px" height="40px" />
+              {{/each}}
+            </div>
           </div>
-          <div class="open-btn">
-            <a href="https://open.spotify.com/playlist/{{spotify_id}}" target="_blank"><i
-                class="material-icons md-18">play_circle_outline</i> Open in Spotify</a>
+          <div class="playlist-info w3-bar-item">
+            <span class="w3-large">{{this.name}}</span>
           </div>
-        </div>
-      </div>
+          <div class="w3-bar-item w3-right">
 
-    </li>
-    {{/each}}
-  </ul>
+            <div class="del-btn">
+              <a href="/playlists/delete/{{_id}}"><i class="material-icons md-18">delete_forever</i></a>
+            </div>
+
+            <div class="open-btn">
+              <a href="https://open.spotify.com/playlist/{{spotify_id}}" target="_blank"><i
+                  class="material-icons md-18">play_circle_outline</i></a>
+            </div>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </section>
+<script src="javascripts/playlists-script.js"></script>
