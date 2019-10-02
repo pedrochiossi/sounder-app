@@ -17,7 +17,7 @@
           <span class="artist">{{this.artists.0.name}}</span>
         </div>
         <div class=" track-link w3-bar-item w3-right">
-          <a title="Add to my Spotify library" class="material-icons md-light" href="#">add_box</a>
+          <button value="{{this.spotify_id}}" title="Add to my Spotify library" class="add-track-button material-icons md-light">add_box</button>
           <a title="Open track in Spotify" class="material-icons md-light" href="http://open.spotify.com/track/{{this.spotify_id}}">open_in_new</a>
         </div>
       </li>

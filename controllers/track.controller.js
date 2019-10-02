@@ -3,6 +3,7 @@ const Track = require('../models/Track');
 
 const spotifyApi = new SpotifyWebApi({});
 
+
 module.exports = {
 
   addAccessToken(user) {
@@ -68,7 +69,7 @@ module.exports = {
 
   async getLikedSpotifyTrackIds(user) {
     try {
-      const likedTracks = await this.getLikedTracks(user)
+      const likedTracks = await this.getLikedTracks(user);
       const spotifyIds = likedTracks.map(track => `spotify:track:${track.spotify_id}`);
       return spotifyIds;
     } catch (error) {
@@ -126,29 +127,12 @@ module.exports = {
 
   async addTrackToSpotify(idArray) {
     try {
-      await spotifyApi.addToMySavedTracks(idArray);
+      const added = await spotifyApi.addToMySavedTracks(idArray);
+      return added;
     } catch (error) {
+      console.log(error);
       throw error;
     }
   },
-
-  async getLikedNewTracks(user) {
-    try {
-      const likedTracks = await Track.find({ liked: true, inPlaylist: false, user: user._id  });
-      const imgURLs = [];
-     
-      for (let i = 0; i < likedTracks.length; i += 1) {
-        if (i < 4) {
-          imgURLs[i] = likedTracks[i].album.images[1].url;
-        } else {
-          break;
-        }
-      };
-      
-      return { likedTracks, imgURLs };
-    } catch (error) {
-      throw error;
-    }
-  },
-
 };
+

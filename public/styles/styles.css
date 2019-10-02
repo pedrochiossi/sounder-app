@@ -46,7 +46,7 @@ body {
 #progress {
   margin-top: 5px;
   width: 100%;
-  background-color: rgba(156, 177, 196, 0.2); }
+  background-color: rgba(194, 194, 194, 0.3); }
 
 #progress-bar {
   width: 0%;
@@ -373,7 +373,7 @@ li {
   border-bottom: 1px solid #3a3939; }
 
 .track-info {
-  width: 80% !important; }
+  width: 70% !important; }
 
 .w3-bar {
   display: flex;
@@ -385,9 +385,13 @@ li {
   .w3-bar:hover {
     background-color: #3a3939; }
 
+.track-link {
+  display: flex !important;
+  justify-content: space-evenly;
+  align-items: center; }
+
 .track-link a {
-  text-decoration: none;
-  margin-right: 15px; }
+  text-decoration: none; }
   .track-link a:hover {
     color: #14BEF0; }
 
@@ -404,8 +408,16 @@ li {
   margin-right: -30px; }
 
 #playlist-name {
+  padding: 4px;
+  border: none;
+  height: 30px;
   width: 200px;
-  margin-right: 30px; }
+  margin-right: 30px;
+  border-bottom: 1px solid #14BEF0;
+  background-color: #252B34;
+  color: white; }
+  #playlist-name:focus {
+    outline: none; }
 
 .w3-dropdown-hover:first-child, .w3-dropdown-click:hover {
   background-color: #000 !important;
@@ -415,5 +427,20 @@ li {
   margin-top: 16px;
   color: white;
   background-color: black; }
+
+.add-track-button {
+  border: none;
+  background-color: transparent;
+  margin-right: 10px; }
+  .add-track-button:hover {
+    color: #14BEF0; }
+
+#add-playlist-button {
+  border-radius: 20px;
+  color: white;
+  border: none;
+  height: 40px;
+  width: 150px;
+  background-color: #1db954; }
 
 /*# sourceMappingURL=styles.css.map */
