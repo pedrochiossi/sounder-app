@@ -14,8 +14,13 @@ darkgreen: #109b41
 */
 *{padding: 0; margin: 0;}
 
+*, *:before, *:after {
+  box-sizing: initial;
+}
+
 html,
 body {
+  background-color: #000;
   position: relative;
   font-family: "Roboto", sans-serif;
 }
@@ -33,18 +38,19 @@ body {
   color: white;
   font-size: 16px;
   font-weight: 700;
-  margin: 8px 0;
+  margin-top: 8px;
 }
 
 .artist {
   color: #999;
   font-size: 12px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 #progress {
+  margin-top: 5px;
   width: 100%;
-  background-color: #aaa9a9;
+  background-color: rgba(rgb(156, 177, 196),.2);
 }
 
 #progress-bar {
@@ -131,7 +137,7 @@ button {
   transform: translate(-50%, -50%);
 }
 
-#album-img {
+img {
   cursor: pointer;
 }
 
@@ -295,6 +301,18 @@ button {
   color: white;
 }
 
+/*
+li {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  margin: 30px 0;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.19);
+}
+*/
+
 .title-header {
   display: block;
   width: 420px;
@@ -313,7 +331,7 @@ button {
   z-index: 1;
   position: fixed;
   top: 0;
-  width: 93%;
+  width: 95%;
   height: 40px;
   background-color: black;
   display: flex;
@@ -364,8 +382,8 @@ button {
 
 .bg-dark {
   background-color: #252B34;
-  width: 100%;
-  height: 100%;
+  min-width: 100%;
+  min-height: 100vh;
   padding: 30px 0;
 }
 
@@ -395,42 +413,74 @@ padding: 15px 0;
   border-radius: 50%;
 }
 
-.tracklist-container{
-  width: 500px;
-  margin: 0 auto;
+.tracks-container {
+  width: 80%;
+  margin: 80px auto 0 auto;
 }
-.tracklist {
+
+.tracks-container h1 {
+  text-align: center;
+  color: #14BEF0;
+  font-weight: 700;
+}
+
+.tracks-container li {
+  border-bottom: 1px solid#3a3939;
+}
+
+.track-info {
+  width: 80% !important;
+}
+
+.w3-bar {
   display: flex;
-  flex-direction: row;
-}
-
-.tracklist-items {
-  width: 100%;
-}
-.tracklist-items li {
-  list-style-type: none;
-  padding: 5px;
-  background: #000;
-  margin: 5px 0;
-}
-
-.tracklist-container label {
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1b1b1b;
   color: white;
+  padding: 0 16px !important;
+  &:hover {
+    background-color: #3a3939;
+  }
 }
 
-.tracklist-container input {
-  width: 70%;
-  height: 30px;
+
+
+
+.track-link a {
+  text-decoration: none;
+  margin-right: 15px;
+  &:hover {
+    color: #14BEF0;
+  }
 }
 
-.tracklist-container button {
-  height: 35px;
-  width: 25%;
+#user-options a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+}
+
+#tracks-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 40px;
+  margin-right: -30px;
+}
+
+#playlist-name {
+  width: 200px;
+  margin-right: 30px;
+}
+
+.w3-dropdown-hover:first-child, .w3-dropdown-click:hover {
+  background-color: #000 !important;
+  color: white !important;
+}
+
+.w3-dropdown-content {
+  margin-top: 16px;
   color: white;
-  border: none;
-  background-color: #1db954;
-}
-
-.tracklist-container form {
-  margin: 20px 0;
+  background-color: black;
 }

@@ -13,7 +13,7 @@
     <div id="progress-bar" style="background-color: rgb({{colors}});"></div>
   </div>
   <span class="song">{{track.name}}</span>
-  <span class="artist">{{track.artists.0.name}}</span>
+  <span class="artist">{{track.artists.0.name}} - {{track.album.name}}</span>
   <div><audio id="song" src="{{track.preview_url}}"></audio></div>
   <div class="buttons-container">
     <form action="/discovery/set-liked" method="POST">
@@ -27,3 +27,4 @@
     </form>
   </div>
 </div>
+<script src="javascripts/discovery-script.js"></script>
