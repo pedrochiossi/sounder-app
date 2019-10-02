@@ -3,7 +3,7 @@ const albums = document.querySelectorAll('.album');
 const playlistButton = document.getElementById('add-playlist-button');
 
 playlistButton.onclick = () => {
-  window.sessionStorage.clear();
+  window.localStorage.clear();
 };
 
 window.onload = () => {
@@ -14,15 +14,15 @@ window.onload = () => {
         .then(() => {
           button.innerText = 'done';
           button.setAttribute('disabled', true);
-          window.sessionStorage.setItem(`${i}`, 'done');
+          window.localStorage.setItem(`${i}`, 'done');
         })
         .catch(err => console.log(err));
     };
   });
-  if (window.sessionStorage.length > 0) {
-    for (let i = 0; i < window.sessionStorage.length; i += 1) {
-      const index = window.sessionStorage.key(i);
-      trackButtons[index].innerText = window.sessionStorage.getItem(index);
+  if (window.localStorage.length > 0) {
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+      const index = window.localStorage.key(i);
+      trackButtons[index].innerText = window.localStorage.getItem(index);
       trackButtons[index].setAttribute('disabled', true);
     }
   }

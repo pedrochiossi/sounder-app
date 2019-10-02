@@ -134,5 +134,14 @@ module.exports = {
       throw error;
     }
   },
-};
 
+  async getNullTrack(user) {
+    try {
+      const nullTracks = await Track.find({ liked: null, user: user._id });
+      return nullTracks;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+};
