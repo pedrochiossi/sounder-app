@@ -18,7 +18,6 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
   trackController.addAccessToken(user);
   try {
     const nullTrack = await trackController.getNullTrack(user);
-    console.log(nullTrack);
     if (nullTrack.length > 0) {
       const colors = await colorThief.getColor(nullTrack[0].album.images[0].url);
       res.render('private/discovery/index', { track: nullTrack[0], colors: colors.join(','), user });
