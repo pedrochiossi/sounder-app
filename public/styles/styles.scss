@@ -1,16 +1,12 @@
 /*
 Color pattern
-
 deepBlue: #252B34
 skyBlue: #14BEF0
 pink-red: #B82050
-
 red: #e71d1d
 darkred: #c40d0d
-
 green: #1db954
 darkgreen: #109b41
-
 */
 *{padding: 0; margin: 0;}
 
@@ -184,6 +180,15 @@ img {
   width: 500px;
 }
 
+
+// .img-wrap {
+//   // background-color: #B82050;
+//   padding: 10px;
+//   border: 5px solid #B82050;
+//   border-radius: 18px;
+//   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 6px 6px rgba(0, 0, 0, 0.4);
+// }
+
 .btn-section {
   display: flex;
   flex-direction: row;
@@ -214,12 +219,12 @@ img {
 }
 
 .open-btn a {
-//  background-color: #00b172;
-//  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+  // background-color: #00b172;
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
   position: relative;
   color: white;
   padding: 5px;
-  font-size: 0.9em;
+  font-size: 0.7em;
   text-decoration: none;
   border-radius: 20px;
   display: flex;
@@ -227,7 +232,6 @@ img {
   justify-content: center;
   align-items: center;
   width: 30px;
-  margin: 7px 0;
 }
 
 .open-btn a:hover {
@@ -238,8 +242,8 @@ img {
 }
 
 .del-btn a {
- // background-color: #e71d1d;
- // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+  // background-color: #e71d1d;
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
   position: relative;
   color: white;
   padding: 5px;
@@ -252,7 +256,6 @@ img {
   align-items: center;
   margin-right: 20px;
   width: 30px;
-  margin: 7px 0;
 }
 
 .del-btn a:hover {
@@ -288,7 +291,11 @@ img {
   border: 2px solid #B82050;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.19);
 }
-
+// .playlists-container {
+//   margin: 0 auto;
+//   width: 800px;
+//   color: white;
+// }
 
 /*
 li {
@@ -416,7 +423,8 @@ padding: 15px 0;
 .tracks-container li {
   border-bottom: 1px solid#3a3939;
 }
-.track-info {
+
+.track-info, .playlist-info {
   width: 70% !important;
 }
 
@@ -486,7 +494,6 @@ padding: 15px 0;
   background-color: black;
 }
 
-
 .add-track-button {
   border: none;
   background-color: transparent;
@@ -504,7 +511,6 @@ padding: 15px 0;
   width: 150px;
   background-color: #1db954;
 }
-
 
 @media (min-width: 768px) {
 
@@ -680,4 +686,3 @@ padding: 15px 0;
   height: 28px;
   border-radius: 50%;
 }
-

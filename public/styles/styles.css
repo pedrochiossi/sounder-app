@@ -1,16 +1,12 @@
 /*
 Color pattern
-
 deepBlue: #252B34
 skyBlue: #14BEF0
 pink-red: #B82050
-
 red: #e71d1d
 darkred: #c40d0d
-
 green: #1db954
 darkgreen: #109b41
-
 */
 * {
   padding: 0;
@@ -184,15 +180,14 @@ img {
   position: relative;
   color: white;
   padding: 5px;
-  font-size: 0.9em;
+  font-size: 0.7em;
   text-decoration: none;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  margin: 7px 0; }
+  width: 30px; }
 
 .open-btn a:hover {
   background-color: #019b65; }
@@ -212,8 +207,7 @@ img {
   justify-content: center;
   align-items: center;
   margin-right: 20px;
-  width: 30px;
-  margin: 7px 0; }
+  width: 30px; }
 
 .del-btn a:hover {
   background-color: #c40d0d; }
@@ -353,7 +347,7 @@ li {
 .tracks-container li {
   border-bottom: 1px solid #3a3939; }
 
-.track-info {
+.track-info, .playlist-info {
   width: 70% !important; }
 
 .w3-bar {
@@ -408,7 +402,6 @@ li {
   margin-top: 16px;
   color: white;
   background-color: black; }
-
 
 .add-track-button {
   border: none;
