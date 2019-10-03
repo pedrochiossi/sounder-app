@@ -79,7 +79,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px; }
+  padding-top: 15px; }
 
 .buttons-container {
   display: flex;
@@ -103,6 +103,10 @@ button {
 
 .image-container {
   position: relative; }
+
+#album-img {
+  width: 400px;
+  height: 400px; }
 
 .centered {
   position: absolute;
@@ -310,7 +314,6 @@ li {
 
 .bg-dark {
   background-color: #252B34;
-  min-width: 100%;
   min-height: 100vh;
   padding: 30px 0; }
 
@@ -356,7 +359,7 @@ li {
   justify-content: space-between;
   background-color: #1b1b1b;
   color: white;
-  padding: 0 16px !important; }
+  padding: 8px 0 !important; }
   .w3-bar:hover {
     background-color: #3a3939; }
 
@@ -379,8 +382,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 40px;
-  margin-right: -30px; }
+  padding-bottom: 40px; }
 
 #playlist-name {
   padding: 4px;
@@ -418,10 +420,22 @@ li {
   width: 150px;
   background-color: #1db954; }
 
+#add-playlist-button-mobile {
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+  border: none;
+  color: white;
+  background-color: #1db954; }
+
 @media (min-width: 768px) {
   .desktop-visible {
     display: block; }
   .mobile-visible {
+    display: none; }
+  #add-playlist-button {
+    display: inline-block; }
+  #add-playlist-button-mobile {
     display: none; }
   .info-wrap {
     display: block;
@@ -465,6 +479,16 @@ li {
     align-content: center;
     align-items: center;
     margin: 0px 15px; }
+  .tracks-container {
+    width: 100%; }
+  #playlist-name {
+    width: 150px; }
+  #tracks-header {
+    padding-right: 20px; }
+  #add-playlist-button {
+    display: none; }
+  #add-playlist-button-mobile {
+    display: inline-block; }
   .home-btn a {
     background-color: #1db954;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
@@ -480,6 +504,11 @@ li {
     align-items: center;
     width: 250px;
     margin: 20px auto; }
+  .discovery-container {
+    width: 300px; }
+  #album-img {
+    width: 300px;
+    height: 300px; }
   .playlist-container {
     width: 100%; }
   .home-small {
