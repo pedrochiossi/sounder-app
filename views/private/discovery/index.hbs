@@ -1,0 +1,30 @@
+<div class="overflow-hidden">
+  <div id="bg-before"></div>
+  <div id="bg"></div>
+</div>
+{{> navbar}}
+<div class="discovery-container">
+  <div class="image-container">
+    <img id="album-img" src="{{track.album.images.0.url}}" height="400" width="400" onclick="playPause()">
+    <div class="centered"><i id="play-icon" class="material-icons md-100 md-light hidden">play_arrow</i></div>
+    <div class="centered"><i id="pause-icon" class="material-icons md-100 md-light hidden">pause</i></div>
+  </div>
+  <div id="progress">
+    <div id="progress-bar" style="background-color: rgb({{colors}});"></div>
+  </div>
+  <span class="song">{{track.name}}</span>
+  <span class="artist">{{track.artists.0.name}} - {{track.album.name}}</span>
+  <div><audio id="song" src="{{track.preview_url}}"></audio></div>
+  <div class="buttons-container">
+    <form action="/discovery/set-liked" method="POST">
+      <input type="hidden" name="id" value="{{track._id}}">
+      <button type="submit" name="liked" value="false" id="dislike-button">
+        <i class="material-icons md-36">clear</i>
+      </button>
+      <button type="submit" name="liked" value="true" id="like-button">
+        <i class="material-icons md-36">favorite</i>
+      </button>
+    </form>
+  </div>
+</div>
+<script src="javascripts/discovery-script.js"></script>

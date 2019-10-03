@@ -1,25 +1,36 @@
 {
   "name": "sounder-app",
   "version": "1.0.0",
-  "description": "A web application to discover new songs and create new playlists using the Spotify Web API.",
-  "main": "app.js",
+  "private": true,
   "scripts": {
+    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pedrochiossi/sounder-app.git"
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.18.3",
+    "cloudinary": "^1.14.0",
+    "colorthief": "^2.3.0",
+    "connect-mongo": "^3.0.0",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "hbs": "^4.0.1",
+    "mongoose": "^5.2.10",
+    "morgan": "^1.9.0",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^2.2.1",
+    "node-sass-middleware": "^0.11.0",
+    "passport": "^0.4.0",
+    "passport-spotify": "^1.1.0",
+    "prettyjson": "^1.2.1",
+    "serve-favicon": "^2.5.0",
+    "spotify-web-api-node": "^4.0.0"
   },
-  "keywords": [
-    "playlist",
-    "songs",
-    "spotify",
-    "web"
-  ],
-  "author": "Pedro M. Chiossi",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pedrochiossi/sounder-app/issues"
-  },
-  "homepage": "https://github.com/pedrochiossi/sounder-app#readme"
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
 }
