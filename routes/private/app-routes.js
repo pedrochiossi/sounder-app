@@ -61,16 +61,6 @@ router.get('/playlists', ensureAuthenticated, async (req, res) => {
   res.render('private/playlist/index', { playlists: plalistInfo, user: req.user });
 });
 
-router.get('/playlists/delete/:playlistId', ensureAuthenticated, async (req, res) => {
-  const id = req.params.playlistId;
-  try {
-    await playlistController.removePlaylist(id);
-  } catch (error) {
-    console.log(error);
-  }
-  res.redirect('/playlists');
-});
-
 router.get('/tracks', ensureAuthenticated, async (req, res) => {
   try {
     const myTracks = await trackController.getLikedTracks(req.user);
