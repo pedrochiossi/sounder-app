@@ -22,5 +22,16 @@ router.post('/tracks/api/add-to-spotify', ensureAuthenticated, async (req, res) 
   }
 });
 
+router.post('/playlists/api/delete/', ensureAuthenticated, async (req, res) => {
+  trackController.addAccessToken(req.user);
+  const { playlistId } = req.body;
+  try {
+    await playlistController.removePlaylist(playlistId);
+    const playlists = await playlistController.getPlaylists(req.user);
+    res.status(200).json({ playlists });
+  } catch (error) {
+    res.status(404).json({ error });
+  }
+});
 
 module.exports = router;
