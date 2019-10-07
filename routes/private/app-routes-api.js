@@ -13,7 +13,6 @@ function ensureAuthenticated(req, res, next) {
 router.post('/tracks/api/add-to-spotify', ensureAuthenticated, async (req, res) => {
   trackController.addAccessToken(req.user);
   const { spotifyId } = req.body;
-  console.log([spotifyId]);
   try {
     const added = await trackController.addTrackToSpotify([spotifyId]);
     res.status(200).json({ added });
