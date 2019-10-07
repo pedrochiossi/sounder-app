@@ -61,5 +61,5 @@ typings/
 .next
 
 .DS_Store
-styles.css
-styles.css.map
+public/styles/styles.css
+public/styles/styles.css.map

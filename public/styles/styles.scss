@@ -8,6 +8,8 @@ darkred: #c40d0d
 green: #1db954
 darkgreen: #109b41
 */
+$icon-size-md: 100px;
+
 *{padding: 0; margin: 0;}
 
 *, *:before, *:after {
@@ -82,26 +84,38 @@ button {
   cursor: pointer;
 }
 
-.discovery-container {
-  width: 400px;
-  margin: 0 auto;
-  position: absolute;
-  top: 4rem;
-  right: 0;
-  left: 0;
-  bottom: 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 15px;
-}
-
-.buttons-container {
+.container {
+  width: 100%;
+  height: 100vh;
+  padding-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.discovery-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(calc(50% - #{$icon-size-md}), calc(0% - #{$icon-size-md}/2));
+}
+
+.image-container {
+  position: relative;
+}
+
+// .buttons-container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
 
 .buttons-container button {
   border: none;
@@ -122,21 +136,12 @@ button {
   }
 }
 
-.image-container {
-  position: relative;
-}
-
 #album-img {
   width: 400px;
   height: 400px;
 }
 
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 
 img {
   cursor: pointer;
@@ -147,7 +152,7 @@ img {
 }
 
 .material-icons.md-36 { font-size: 36px; }
-.material-icons.md-100 { font-size: 100px; }
+.material-icons.md-100 { font-size: $icon-size-md; }
 .material-icons.md-light { color: white; }
 
 #bg-before {
@@ -332,14 +337,14 @@ li {
   z-index: 1;
   position: fixed;
   top: 0;
-  width: 95%;
+  width: 98%;
   height: 40px;
   background-color: black;
   display: flex;
   justify-content: space-between;
   justify-items: center;
   align-items: center;
-  padding: 10px 50px;
+  padding: 10px;
   box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
 }
 
@@ -684,7 +689,7 @@ padding: 15px 0;
 // }
 
 .drop-icon {
-  margin: 0 70px 0 0;
+  margin-right: 20px;
 }
 
 .dropdown-menu {
@@ -716,4 +721,43 @@ padding: 15px 0;
   width: 28px;
   height: 28px;
   border-radius: 50%;
+}
+
+.delete-btn {
+  border: none;
+  background-color: transparent;
+  &:hover {
+    color: red;
+  }
+  margin-right: 10px;
+}
+
+.modal-container-custom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 50px 0;
+}
+
+.modal-color-custom {
+  background-color: #252B34;
+}
+
+.confirm-delete-btn {
+  background-color: red;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  height: 40px;
+  width: 150px;
+
+}
+
+.cancel-delete-btn {
+  border-radius: 20px;
+  color: white;
+  border: none;
+  height: 40px;
+  width: 150px;
+  background-color: #1db954; 
 }
