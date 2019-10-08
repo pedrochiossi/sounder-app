@@ -69,6 +69,7 @@ passport.use(
           User.create({
             spotifyId: profile.id,
             name: profile.displayName,
+            premium: profile.product === 'premium',
             imageURL: profile.photos[0],
             email: profile.emails[0].value,
             access_token: accessToken,

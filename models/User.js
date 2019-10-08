@@ -7,6 +7,7 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: String,
+  premium: { type: Boolean, required: true },
   imageURL: { type: String, default: 'images/avatar.png' },
   access_token: { type: String, required: true },
   refresh_token: { type: String, required: true },
