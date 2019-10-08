@@ -4,12 +4,12 @@ function modalDeletePlaylist(playlistId) {
     <header class="w3-container modal-color-custom"> 
       <span onclick="document.getElementById('myModal').style.display='none'" 
       class="w3-button w3-display-topright">&times;</span>
-      <h2>Delete Playlist?</h2>
+      <h2>Delete playlist?</h2>
     </header>
     <div class="w3-container w3-black">
-
-      <div class="modal-container-custom">
-      <button class="confirm-delete-btn" onclick="deleteOnePlaylist('${playlistId}')">Confirm</button>
+      
+    <div class="modal-container-custom">
+      <button class="confirm-delete-btn" onclick="deleteOnePlaylist('${playlistId}')">Delete</button>
       <button class="cancel-delete-btn" onclick="document.getElementById('myModal').style.display='none'">Cancel</button>
       </div>
     </div>
