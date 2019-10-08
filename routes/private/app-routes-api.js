@@ -33,4 +33,13 @@ router.post('/playlists/api/delete/', ensureAuthenticated, async (req, res) => {
   }
 });
 
+router.get('/api/user', (req, res) => {
+  const { user } = req;
+  if (user) {
+    res.status(200).json({ user });
+  } else {
+    res.status(400).json({});
+  }
+});
+
 module.exports = router;

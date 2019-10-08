@@ -19,12 +19,17 @@
         </div>
         <div class=" track-link w3-bar-item w3-right">
           <button value="{{this.spotify_id}}" title="Add to my Spotify library" class="add-track-button material-icons md-light">add_box</button>
-          <a title="Open track in Spotify" class="material-icons md-light" href="http://open.spotify.com/track/{{this.spotify_id}}">open_in_new</a>
+          <a title="Open track in Spotify" class="material-icons md-light" href="http://open.spotify.com/track/{{this.spotify_id}}">play_circle_outline</a>
         </div>
       </li>
       {{/each}}
     </ul>
   </div>
 </div>
-  
-<script src="javascripts/tracks-script.js"></script>
+
+{{#if user.premium}}
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
+  <script src="javascripts/tracks-premium-script.js"></script>
+{{else}}
+  <script src="javascripts/tracks-free-script.js"></script>
+{{/if}}
