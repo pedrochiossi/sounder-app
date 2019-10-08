@@ -1,11 +1,8 @@
 const express = require('express');
 const colorThief = require('colorthief');
-const axios = require('axios');
-const qs = require('qs');
 const trackController = require('../../controllers/track.controller');
 const playlistController = require('../../controllers/playlist.controller.js');
-const User = require('../../models/User');
-
+const userController = require('../../controllers/user.controller');
 
 const router = express.Router();
 
@@ -15,22 +12,6 @@ function ensureAuthenticated(req, res, next) {
     return next();
   }
   res.redirect('/');
-}
-
-async function resetToken(user) {
-  const data = qs.stringify({
-    grant_type: 'refresh_token',
-    refresh_token: user.refresh_token,
-    client_id: process.env.APPKEY,
-    client_secret: process.env.APPSECRET,
-  });
-  const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-  try {
-    const response = await axios.post('https://accounts.spotify.com/api/token', data, headers);
-    await User.findOneAndUpdate({ _id: user._id }, { access_token: response.data.access_token });
-  } catch (error) {
-    console.log(error);
-  }
 }
 
 router.get('/discovery', ensureAuthenticated, async (req, res) => {
@@ -48,8 +29,12 @@ router.get('/discovery', ensureAuthenticated, async (req, res) => {
     }
   } catch (err) {
     if (err.statusCode === 401) {
-      resetToken(user);
-      res.redirect('/discovery');
+      try {
+        await userController.resetToken(user);
+        res.redirect('/discovery');
+      } catch (error) {
+        console.log(error);
+      }
     }
     console.log(err);
   }
@@ -63,8 +48,12 @@ router.post('/playlists/add-to-spotify', ensureAuthenticated, async (req, res) =
     res.redirect('/playlists');
   } catch (err) {
     if (err.statusCode === 401) {
-      resetToken(req.user);
-      res.redirect('/playlists');
+      try {
+        await userController.resetToken(req.user);
+        res.redirect('/playlists');
+      } catch (error) {
+        console.log(error);
+      }
     }
     console.log(err);
   }
@@ -81,16 +70,31 @@ router.post('/discovery/set-liked', ensureAuthenticated, async (req, res) => {
     res.redirect('/discovery');
   } catch (error) {
     if (error.statusCode === 401) {
-      resetToken(req.user);
-      res.redirect('/discovery');
+      try {
+        await userController.resetToken(req.user);
+        res.redirect('/discovery');
+      } catch (err) {
+        console.log(err);
+      }
     }
     console.log(error);
   }
 });
 
 router.get('/playlists', ensureAuthenticated, async (req, res) => {
-  const plalistInfo = await playlistController.getPlaylists(req.user);
-  res.render('private/playlist/index', { playlists: plalistInfo, user: req.user });
+  try {
+    const plalistInfo = await playlistController.getPlaylists(req.user);
+    res.render('private/playlist/index', { playlists: plalistInfo, user: req.user });
+  } catch (error) {
+    if (error.statusCode === 401) {
+      try {
+        await userController.resetToken(req.user);
+        res.redirect('/playlists');
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 });
 
 router.get('/tracks', ensureAuthenticated, async (req, res) => {
@@ -99,8 +103,12 @@ router.get('/tracks', ensureAuthenticated, async (req, res) => {
     res.render('private/track/index', { myTracks, user: req.user });
   } catch (error) {
     if (error.statusCode === 401) {
-      resetToken(req.user);
-      res.redirect('/tracks');
+      try {
+        await userController.resetToken(req.user);
+        res.redirect('/tracks');
+      } catch (err) {
+        console.log(err);
+      }
     }
     console.log(error);
   }
