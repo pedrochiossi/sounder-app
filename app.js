@@ -34,8 +34,8 @@ app.use(cookieParser());
 app.use(session({
   secret: 'basic-auth-secret',
   cookie: { maxAge: 3600000 * 24 * 14 },
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60, // 1 day
