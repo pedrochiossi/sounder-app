@@ -21,7 +21,7 @@
 ## About The Project
 <br />
 
-[![Product Name Screen Shot][product-screenshot]](https://sounder-app.kerokuapp.com)
+[![Product Name Screen Shot][product-screenshot]](https://sounder-app.herokuapp.com)
 
 **Sounder-app** is a full-stack web application that uses the Spotify-Web-API to provide song recomendations based on the user's liked songs library. 
 
