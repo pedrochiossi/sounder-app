@@ -22,8 +22,10 @@ window.onload = () => {
   if (window.localStorage.length > 0) {
     for (let i = 0; i < window.localStorage.length; i += 1) {
       const index = window.localStorage.key(i);
-      trackButtons[index].innerText = window.localStorage.getItem(index);
-      trackButtons[index].setAttribute('disabled', true);
+      if (index.length === 1) {
+        trackButtons[index].innerText = window.localStorage.getItem(index);
+        trackButtons[index].setAttribute('disabled', true);
+      }
     }
   }
 };
