@@ -1,4 +1,12 @@
 [![Contributors][contributors-shield]][contributors-url]
+[![MIT License][license-shield]][license-url]
+[![Issues][issues-shield]][issues-url]
+[![Stargazers][stars-shield]][stars-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
+
 
 <br />
 <p align="center">
@@ -69,15 +77,38 @@ MONGODB_URI=mongodb://localhost/sounderApp
 <!-- USAGE EXAMPLES -->
 ## How to use
 
-<img src="/public/images/sounder_demo.gif">
+<p align="center">
+  <img src="/public/images/sounder_demo.gif">
+</p>
 
 * Click on the image to play or pause the 30s audio preview
 * Like or dislike it to fetch a new song
 * You can listen all your liked tracks again and add them to a new playlist
-* If you are a premium user you can play the whole track on the tracks view
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+* [W3.css](https://www.w3schools.com/w3css/)
+* [color-thief](https://github.com/lokesh/color-thief)
+* [freefrontend](https://freefrontend.com/css-music-players/)
+* [spotify-web-api-node](https://github.com/thelinmichael/spotify-web-api-node)
+* [passport-spotify](https://github.com/JMPerez/passport-spotify)
+* [LGK Music Player](https://codepen.io/lgkonline/pen/BQdeyZ)
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues-closed/pedrochiossi/sounder-app
+[issues-url]: https://github.com/pedrochiossi/sounder-app/issues
+[stars-shield]: https://img.shields.io/github/stars/pedrochiossi/sounder-app?style=social
+[stars-url]: https://github.com/pedrochiossi/sounder-app/stargazers
+[contributors-shield]: https://img.shields.io/github/contributors/pedrochiossi/sounder-app
 [contributors-url]: https://github.com/pedrochiossi/sounder-app/graphs/contributors
+[license-shield]: https://img.shields.io/github/license/pedrochiossi/sounder-app
+[license-url]: https://github.com/pedrochiossi/souder-app/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/pedrochiossi
 [product-screenshot]: /public/images/screenshot_chrome_sounder.png
 
