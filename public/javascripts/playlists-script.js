@@ -44,12 +44,10 @@ async function deleteOnePlaylist(id) {
           <div class="playlist-info w3-bar-item">
             <span class="w3-large">${playlist.name}</span>
           </div>
-          <div class="track-link w3-bar-item w3-right ">
-            <button onclick="modalDeletePlaylist('${playlist._id}')" title="Delete this playlist"
-            class="delete-btn material-icons md-light">delete_forever</button>
-            <a href="https://open.spotify.com/playlist/${playlist.spotify_id}" target="_blank"><i
-                class="material-icons md-18">play_circle_outline</i></a>
-          </div>
+          <div class=" track-link w3-bar-item w3-right">
+          <button onclick="modalDeletePlaylist(${playlist.id})" title="Delete this playlist" class="bg-red add-track-button material-icons md-light">delete_forever</button>
+          <a href="https://open.spotify.com/playlist/${playlist.spotify_id}" target="_blank" title="Open playlist in Spotify" class="material-icons md-light">open_in_new</a>
+        </div>
         </li>
         `;
   });
