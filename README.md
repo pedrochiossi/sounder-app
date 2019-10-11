@@ -107,7 +107,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [contributors-shield]: https://img.shields.io/github/contributors/pedrochiossi/sounder-app
 [contributors-url]: https://github.com/pedrochiossi/sounder-app/graphs/contributors
 [license-shield]: https://img.shields.io/github/license/pedrochiossi/sounder-app
-[license-url]: https://github.com/pedrochiossi/souder-app/LICENSE
+[license-url]: https://github.com/pedrochiossi/sounder-app/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/pedrochiossi
 [product-screenshot]: /public/images/screenshot_chrome_sounder.png
