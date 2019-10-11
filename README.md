@@ -67,11 +67,9 @@ MONGODB_URI=mongodb://localhost/sounderApp
 * On production, run `npm start`.
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## How to use
 
-<p align="center">
-  <img src="/public/images/sounder_demo.gif">
-</p>
+<img src="/public/images/sounder_demo.gif">
 
 * Click on the image to play or pause the 30s audio preview
 * Like or dislike it to fetch a new song
