@@ -49,7 +49,7 @@ This project can be run on a local server or deployed to heroku or other platfor
 ### Installation
 
 1. Register an application in Spotify and get a client_ID and a client_secret at [https://developer.spotify.com](https://developer.spotify.com)
-2. Add as redirect uris both http://localhost:PORT/auth/spotify/callback (for development) and <production_domain>/auth/callback (for deploy).
+2. Add as redirect uris both http://localhost:PORT/auth/spotify/callback (for development) and <production_domain>/auth/spotify/callback (for deploy).
 3. Clone the repo
 ```sh
 git clone https:://github.com/pedrochiossi/sounder-app.git
