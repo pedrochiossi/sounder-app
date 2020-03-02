@@ -85,10 +85,6 @@ MONGODB_URI=mongodb://localhost/sounderApp
 * Like or dislike it to fetch a new song
 * You can listen all your liked tracks again and add them to a new playlist
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
