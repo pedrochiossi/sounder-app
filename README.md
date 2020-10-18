@@ -11,7 +11,7 @@
 <br />
 <p align="center">
   <a href="https://sounder-app.herokuapp.com">
-    <img src="/public/images/sounder_app_logo.png" alt="Logo" width="80" height="80">
+    <img src="client/public/images/sounder_app_logo.png" alt="Logo" width="80" height="80">
   </a>
   <h2 align="center">sounder-app</h2>
   
@@ -78,7 +78,7 @@ MONGODB_URI=mongodb://localhost/sounderApp
 ## How to use
 
 <p align="center">
-  <img src="/public/images/sounder_demo.gif">
+  <img src="client/public/images/sounder_demo.gif">
 </p>
 
 * Click on the image to play or pause the 30s audio preview
@@ -106,5 +106,5 @@ MONGODB_URI=mongodb://localhost/sounderApp
 [license-url]: https://github.com/pedrochiossi/sounder-app/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/pedrochiossi
-[product-screenshot]: /public/images/screenshot_chrome_sounder.png
+[product-screenshot]: /client/public/images/screenshot_chrome_sounder.png
 
