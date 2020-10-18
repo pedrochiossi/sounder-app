@@ -11,6 +11,7 @@ const logger = require('morgan');
 const authRoutes = require('./routes/public/auth.routes');
 const trackRoutes = require('./routes/private/track.routes');
 const playlistRoutes = require('./routes/private/playlist.routes');
+const path = require('path');
 
 const app = express();
 
@@ -51,5 +52,13 @@ app.use(passport.session());
 app.use('/api', authRoutes);
 app.use('/api/tracks', trackRoutes);
 app.use('/api/playlists', playlistRoutes );
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  })
+}
 
 module.exports = app;

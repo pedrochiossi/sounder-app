@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "server-dev": "nodemon ./bin/www",
-    "server": "node ./bin/www",
+    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && yarn start",
-    "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    
   },
   "dependencies": {
     "axios": "^0.19.2",
