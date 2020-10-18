@@ -34,6 +34,7 @@ build/Release
 
 # Dependency directories
 node_modules/
+client/node_modules
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -63,3 +64,21 @@ typings/
 .DS_Store
 public/styles/styles.css
 public/styles/styles.css.map
+
+client/.pnp
+.pnp.js
+
+# testing
+client/coverage
+
+# production
+client/build
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+yarn-debug.log*
+yarn-error.log*

@@ -3,35 +3,32 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server-dev": "nodemon ./bin/www",
+    "server": "node ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\""
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "bcrypt": "^3.0.6",
+    "axios": "^0.19.2",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
-    "cloudinary": "^1.14.0",
-    "colorthief": "^2.3.0",
-    "connect-mongo": "^3.0.0",
-    "cookie-parser": "^1.4.3",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dotenv": "^6.0.0",
     "express": "^4.17.1",
-    "express-session": "^1.16.2",
-    "hbs": "^4.0.5",
-    "mongoose": "^5.7.5",
-    "morgan": "^1.9.0",
-    "multer": "^1.4.2",
-    "multer-storage-cloudinary": "^2.2.1",
-    "node-sass-middleware": "^0.11.0",
-    "passport": "^0.4.0",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.10.9",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
     "passport-spotify": "^1.1.0",
     "prettyjson": "^1.2.1",
-    "qs": "^6.9.0",
-    "serve-favicon": "^2.5.0",
+    "qs": "^6.9.4",
     "spotify-web-api-node": "^4.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2"
+    "concurrently": "^5.3.0",
+    "nodemon": "^1.19.4"
   }
 }
