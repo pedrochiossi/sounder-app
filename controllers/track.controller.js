@@ -6,8 +6,8 @@ const spotifyApi = new SpotifyWebApi({});
 
 module.exports = {
 
-  addAccessToken(user) {
-    spotifyApi.setAccessToken(user.access_token);
+  addAccessToken(token) {
+    spotifyApi.setAccessToken(token);
   },
 
   async getTotal() {
@@ -36,9 +36,10 @@ module.exports = {
         seed_tracks: id,
         min_popularity: 10,
       });
-      const contains = await spotifyApi.containsMySavedTracks([recomendation.body.tracks[0].id]);
-      const track = await Track.findOne({ spotify_id: recomendation.body.tracks[0].id, user: user._id });
-      if (!contains.body[0] && !track && recomendation.body.tracks[0].preview_url !== null) {
+      const { id: trackId, preview_url } = recomendation.body.tracks[0]
+      const contains = await spotifyApi.containsMySavedTracks([trackId]);
+      const track = await Track.findOne({ spotify_id: trackId, user: user._id });
+      if (!contains.body[0] && !track && preview_url !== null) {
         return recomendation.body.tracks[0];
       }
       return this.getRandomRecommendation(id, user);
@@ -127,15 +128,14 @@ module.exports = {
 
   async addTrackToSpotify(idArray) {
     try {
-      const added = await spotifyApi.addToMySavedTracks(idArray);
-      return added;
+      await spotifyApi.addToMySavedTracks(idArray);
     } catch (error) {
       console.log(error);
       throw error;
     }
   },
 
-  async getNullTrack(user) {
+  async getNullTracks(user) {
     try {
       const nullTracks = await Track.find({ liked: null, user: user._id });
       return nullTracks;
