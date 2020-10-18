@@ -2,24 +2,27 @@ const SpotifyWebApi = require('spotify-web-api-node');
 const Playlist = require('../models/Playlist');
 const trackController = require('./track.controller');
 
-const spotifyApi = new SpotifyWebApi({
-  clientID: process.env.APPKEY,
-  clientSecret: process.env.APPSECRET,
-});
+const spotifyApi = new SpotifyWebApi({});
+
+function addAccessToken(token) {
+  spotifyApi.setAccessToken(token);
+}
+
+function generatePlaylistImages(items) {
+  const imgURLs = [];
+
+  for (let i = 0; i < 4; i += 1) {
+    imgURLs[i] = items[i].track.album.images[1].url;
+  };
+
+  return imgURLs;
+}
 
 async function savePlaylistFromSpotify(user, playlist) {
   const playlistFromSpotify = await spotifyApi.getPlaylist(playlist.body.id);
 
-  const imgURLs = [];
-  const itemsArray = playlistFromSpotify.body.tracks.items;
-
-  for (let i = 0; i < itemsArray.length; i += 1) {
-    if (i < 4) {
-      imgURLs[i] = itemsArray[i].track.album.images[1].url;
-    } else {
-      break;
-    }
-  }
+  const { items } = playlistFromSpotify.body.tracks;
+  const images = generatePlaylistImages(items);
 
   const mongoTrackIds = await trackController.getLikedTrackIds(user);
   const date = new Date();
@@ -31,7 +34,7 @@ async function savePlaylistFromSpotify(user, playlist) {
       user: user._id,
       created_at: date,
       spotify_id: playlist.body.id,
-      images: imgURLs,
+      images
     });
   } catch (err) {
     throw err;
@@ -41,7 +44,6 @@ async function savePlaylistFromSpotify(user, playlist) {
 }
 
 async function addToSpotify(user, spotifyTracksIdArray, playlistName) {
-  spotifyApi.setAccessToken(user.access_token);
   try {
     const playlistInSpotify = await spotifyApi.createPlaylist(user.spotifyId, playlistName, { public: false });
     await spotifyApi.addTracksToPlaylist(playlistInSpotify.body.id, spotifyTracksIdArray);
@@ -70,6 +72,7 @@ async function removePlaylist(id) {
 }
 
 module.exports = {
+  addAccessToken,
   addToSpotify,
   savePlaylistFromSpotify,
   getPlaylists,

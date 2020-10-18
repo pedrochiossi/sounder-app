@@ -1,17 +1,16 @@
 require('dotenv').config();
 const passport = require('passport');
-const SpotifyStrategy = require('passport-spotify').Strategy;
+const cors = require('cors');
 const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const favicon = require('serve-favicon');
 const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const path = require('path');
-const hbs = require('hbs');
-const User = require('./models/User');
+const authRoutes = require('./routes/public/auth.routes');
+const trackRoutes = require('./routes/private/track.routes');
+const playlistRoutes = require('./routes/private/playlist.routes');
 
 const app = express();
 
@@ -42,77 +41,15 @@ app.use(session({
   }),
 }));
 
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
-
-passport.use(
-  new SpotifyStrategy(
-    {
-      clientID: process.env.APPKEY,
-      clientSecret: process.env.APPSECRET,
-      callbackURL: process.env.CALLBACKURI,
-    },
-    (accessToken, refreshToken, expires_in, profile, done) => {
-      User.findOneAndUpdate({ spotifyId: profile.id }, { access_token: accessToken }, { new: true })
-        .then((user) => {
-          if (user) {
-            done(null, user);
-            return;
-          }
-          User.create({
-            spotifyId: profile.id,
-            name: profile.displayName,
-            premium: profile.product === 'premium',
-            imageURL: profile.photos[0],
-            email: profile.emails[0].value,
-            access_token: accessToken,
-            refresh_token: refreshToken,
-          })
-            .then((newUser) => {
-              done(null, newUser);
-            })
-            .catch(err => done(err));
-        })
-        .catch(err => done(err));
-    },
-  ),
-);
-
+app.use(cors());
 app.use(passport.initialize());
+require('./config/passport');
 app.use(passport.session());
-app.use(require('node-sass-middleware')({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  sourceMap: true,
-}));
-
-hbs.registerPartials(path.join(__dirname, 'views/partials'));
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
-
-const index = require('./routes/public/index');
-const authRoutes = require('./routes/public/auth-routes');
-
-app.use('/', index);
-app.use('/', authRoutes);
 
 
-const appRoutes = require('./routes/private/app-routes');
-
-app.use('/', appRoutes);
-
-const apiRoutes = require('./routes/private/app-routes-api');
-
-app.use('/', apiRoutes);
+app.use('/api', authRoutes);
+app.use('/api/tracks', trackRoutes);
+app.use('/api/playlists', playlistRoutes );
 
 module.exports = app;
