@@ -135,10 +135,10 @@ module.exports = {
     }
   },
 
-  async getNullTracks(user) {
+  async getNullTrack(user) {
     try {
-      const nullTracks = await Track.find({ liked: null, user: user._id });
-      return nullTracks;
+      const nullTrack = await Track.find({ liked: null, user: user._id });
+      return nullTrack;
     } catch (error) {
       throw error;
     }
