@@ -21,7 +21,7 @@ router.get(
 
 router.get('/auth/spotify/callback',
   passport.authenticate('spotify'), (req, res) => {
-    res.redirect('http://localhost:3000/discovery');
+    res.redirect(`${process.env.CLIENT_URL}/discovery`);
 });
 
 router.get('/logout', (req, res) => {
