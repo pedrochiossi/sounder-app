@@ -3,6 +3,8 @@ import logo from 'Assets/images/sounder_app_logo.png';
 import sounderPreview from 'Assets/images/sounder-preview-img.png';
 import { ReactComponent as SpotifyIcon } from 'Assets/images/spotify.svg';
 import { SvgIcon, CircularProgress } from '@material-ui/core';
+import './home.scss';
+
 
 const Home = () => {
 
