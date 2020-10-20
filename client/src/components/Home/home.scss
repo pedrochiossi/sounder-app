@@ -17,33 +17,40 @@ $likegreen: #0dd30d;
   }
 }
 
-.home-btn {
-  a {
-    background-color: $green;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
-    position: relative;
-    color: white;
-    padding: 20px;
-    font-size: 1.2em;
-    text-decoration: none;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 250px;
+.home-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 50px 20px;
 
-    &:hover {
-      background-color: $darkgreen;
-    }
-
-    &:active {
-      box-shadow: none;
-    }
-
-    > svg {
-      width: 1.5em;
-      height: 1.5em;
+  .home-btn {
+    a {
+      background-color: $green;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+      position: relative;
+      color: white;
+      padding: 20px;
+      font-size: 1.2em;
+      text-decoration: none;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 250px;
+      margin-top: 50px;
+  
+      &:hover {
+        background-color: $darkgreen;
+      }
+  
+      &:active {
+        box-shadow: none;
+      }
+  
+      > svg {
+        width: 1.5em;
+        height: 1.5em;
+      }
     }
   }
 }
@@ -74,18 +81,6 @@ $likegreen: #0dd30d;
   }
 }
 
-@media (min-width: 768px) {
-  .home-container {
-    justify-content: space-evenly;
-    margin: 50px 20px;
-
-    .home-btn a {
-      margin-top: 50px;
-    }
-  }
-}
-
-
 @media (max-width: 767px ) {
   .home-small {
     display: flex;
@@ -111,7 +106,7 @@ $likegreen: #0dd30d;
       margin: 0px auto;
       &.desktop-visible {
         img {
-          width: 370px;
+          width: 400px;
         }
       }
   
