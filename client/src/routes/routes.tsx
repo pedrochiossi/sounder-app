@@ -5,7 +5,6 @@ import Home from '../pages/Home';
 
 const Discovery = lazy(() => import('../pages/Discovery'));
 
-
 const Routes: React.FC = () => {
   return (
     <Suspense fallback={<Loader />}>
@@ -14,7 +13,7 @@ const Routes: React.FC = () => {
         <Route path="/discovery" render={() => <Discovery />} />
       </Switch>
     </Suspense>
-  )
+  );
 };
 
 export default Routes;

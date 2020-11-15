@@ -12,6 +12,7 @@ const authRoutes = require('./routes/public/auth.routes');
 const trackRoutes = require('./routes/private/track.routes');
 const playlistRoutes = require('./routes/private/playlist.routes');
 const path = require('path');
+const AppError = require('./errors/AppError');
 
 const app = express();
 
@@ -52,6 +53,22 @@ app.use(passport.session());
 app.use('/api', authRoutes);
 app.use('/api/tracks', trackRoutes);
 app.use('/api/playlists', playlistRoutes );
+
+app.use((err, req, res, next) => {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      status: 'error',
+      message: err.message
+    });
+  }
+
+  console.error(err);
+  
+  return res.status(500).json({ 
+    status: 'error', 
+    message: 'Internal server error' 
+  });
+})
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));

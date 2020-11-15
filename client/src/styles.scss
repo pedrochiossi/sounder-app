@@ -60,10 +60,16 @@ h1, h2, h3, h4, h5, h6 {
 #progress-bar {
   width: 0%;
   height: .6rem;
-  &.play {
-    animation: progress-bar 30s linear;
+  animation: progress-bar 30s linear;
+
+  &.paused {
     animation-play-state: paused;
   }
+
+  &.play {
+    animation-play-state: running;
+  }
+
 }
 
 @keyframes progress-bar {

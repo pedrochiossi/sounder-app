@@ -9,7 +9,6 @@
     "client": "cd client && yarn start",
     "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
-    
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -21,6 +20,7 @@
     "cors": "^2.8.5",
     "dotenv": "^6.0.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.10.9",
     "morgan": "^1.10.0",
