@@ -1,12 +1,12 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Loader from 'components/Loader';
-import Home from 'components/Home';
+import Loader from '../components/Loader';
+import Home from '../pages/Home';
 
-const Discovery = lazy(() => import('components/Discovery'));
+const Discovery = lazy(() => import('../pages/Discovery'));
 
 
-const Routes = () => {
+const Routes: React.FC = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
