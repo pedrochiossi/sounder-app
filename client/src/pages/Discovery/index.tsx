@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Discovery = () => {
+const Discovery: React.FC = () => {
   return (
     <div style={{color: 'white'}}>
-      Discovery Page      
+      Discovery Page
     </div>
   )
 }
