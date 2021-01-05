@@ -10,7 +10,7 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\""
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "colorthief": "^2.3.2",
