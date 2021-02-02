@@ -11,6 +11,7 @@ const logger = require('morgan');
 const authRoutes = require('./routes/public/auth.routes');
 const trackRoutes = require('./routes/private/track.routes');
 const playlistRoutes = require('./routes/private/playlist.routes');
+const userRoutes = require('./routes/private/user.routes');
 const path = require('path');
 const AppError = require('./errors/AppError');
 
@@ -51,6 +52,7 @@ app.use(passport.session());
 
 
 app.use('/api', authRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/tracks', trackRoutes);
 app.use('/api/playlists', playlistRoutes );
 
@@ -63,10 +65,10 @@ app.use((err, req, res, next) => {
   }
 
   console.error(err);
-  
-  return res.status(500).json({ 
-    status: 'error', 
-    message: 'Internal server error' 
+
+  return res.status(500).json({
+    status: 'error',
+    message: 'Internal server error'
   });
 })
 

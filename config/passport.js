@@ -20,7 +20,12 @@ passport.use(
       callbackURL: process.env.CALLBACKURI,
     },
     (accessToken, refreshToken, expires_in, profile, done) => {
-      User.findOneAndUpdate({ spotifyId: profile.id }, { access_token: accessToken }, { new: true })
+      User.findOneAndUpdate({ spotifyId: profile.id }, {
+        access_token: accessToken,
+        refresh_token: refreshToken,
+        imageURL: profile.photos[0],
+        premium: profile.product === 'premium'
+      }, { new: true })
         .then((user) => {
           if (user) {
             done(null, user);
