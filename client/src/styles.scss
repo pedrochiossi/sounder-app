@@ -281,7 +281,7 @@ img {
   z-index: 1;
   position: fixed;
   top: 0;
-  width: 98%;
+  width: 99%;
   height: 40px;
   background-color: black;
   display: flex;
@@ -297,10 +297,11 @@ img {
   flex-direction: row;
   justify-content: space-evenly;
   width: 450px;
+  align-items: center;
 }
 
 .navbar-container {
-  a {
+  a, button, span {
     text-decoration: none;
     color: white;
 
@@ -312,20 +313,10 @@ img {
 }
 
 .list-menu-item {
-  a {
+  a, button {
     flex-direction: row;
     align-items: center;
     display: flex;
-  }
-
-  span {
-    text-align: center;
-    background-color: $darkred;
-    color: white;
-    border-radius: 50%;
-    height: 18px;
-    width: 12px;
-    padding: 2px 3px;
   }
 }
 
@@ -336,7 +327,7 @@ img {
 .bg-dark {
   background-color: $deepBlue;
   min-height: 100vh;
-  padding: 30px 0;
+  padding: 60px 0;
 
   h1 {
     color: $skyBlue;
@@ -344,7 +335,7 @@ img {
   }
 
   h2, h3 {
-    color: white;  
+    color: white;
   }
 
   p {
@@ -599,5 +590,5 @@ img {
   border: none;
   height: 40px;
   width: 150px;
-  background-color: $green; 
+  background-color: $green;
 }
