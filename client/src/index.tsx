@@ -4,13 +4,17 @@ import './styles.scss';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes/routes';
 import * as serviceWorker from './serviceWorker';
+import { UserProvider } from './context/user';
+import Main from './components/Main';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <UserProvider>
+      <Main>
+        <Routes />
+      </Main>
+    </UserProvider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );
 
