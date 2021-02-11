@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import logo from '../../Assets/images/sounder_app_logo.png';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import MenuIcon from '@material-ui/icons/Menu';
-import Dropdown from '../Dropdown';
 import { Link } from 'react-router-dom';
+import Dropdown from '../Dropdown';
+import logo from '../../Assets/images/sounder_app_logo.png';
 import './header.scss';
 import { UserContext } from '../../context/user';
 
@@ -14,8 +14,7 @@ interface UserProps {
   imageURL: string;
 }
 
-const Header : React.FC<UserProps> = ({ name, imageURL }) => {
-
+const Header: React.FC<UserProps> = ({ name, imageURL }: UserProps) => {
   const { logout } = useContext(UserContext);
 
   return (
@@ -43,12 +42,14 @@ const Header : React.FC<UserProps> = ({ name, imageURL }) => {
           <Dropdown
             triggerContent={
               <>
-                <img className="icon-gap" src={imageURL} alt="user"/>
+                <img className="icon-gap" src={imageURL} alt="user" />
                 {name}
               </>
             }
           >
-            <button className="dropdown-link" onClick={logout}>Logout</button>
+            <button className="dropdown-link" onClick={logout}>
+              Logout
+            </button>
           </Dropdown>
         </div>
       </div>
@@ -61,13 +62,22 @@ const Header : React.FC<UserProps> = ({ name, imageURL }) => {
             </>
           }
         >
-          <Link className="dropdown-link" to="/playlists"><QueueMusicIcon className="icon-gap" />Playlists</Link>
-          <Link className="dropdown-link" to="/tracks"><MusicNoteIcon className="icon-gap" />Liked Tracks</Link>
-          <button className="dropdown-link" onClick={logout}><PersonOutlineIcon className="icon-gap" />{`Logout of ${name}`}</button>
+          <Link className="dropdown-link" to="/playlists">
+            <QueueMusicIcon className="icon-gap" />
+            Playlists
+          </Link>
+          <Link className="dropdown-link" to="/tracks">
+            <MusicNoteIcon className="icon-gap" />
+            Liked Tracks
+          </Link>
+          <button className="dropdown-link" onClick={logout}>
+            <PersonOutlineIcon className="icon-gap" />
+            {`Logout of ${name}`}
+          </button>
         </Dropdown>
       </div>
     </nav>
-  )
-}
+  );
+};
 
 export default Header;

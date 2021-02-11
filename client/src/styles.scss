@@ -118,6 +118,7 @@ button {
 }
 
 .image-container {
+  margin-top: 50px;
   position: relative;
 }
 
@@ -142,11 +143,6 @@ button {
   }
 }
 
-#album-img {
-  width: 400px;
-  height: 400px;
-}
-
 img {
   cursor: pointer;
 }
@@ -161,21 +157,21 @@ img {
 
 #bg-before {
   position: fixed;
-  top: 60px;
   right: 0;
   bottom: 0;
   left: 0;
   box-shadow: inset 0 0 200px #000;
   filter: blur(15px);
+  height: 100%;
 }
 
 #bg {
   position: fixed;
-  top: 60px;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.6);
+  height: 100%
 }
 
 .btn-section {
@@ -491,15 +487,6 @@ img {
   #tracks-header { padding-right: 20px;}
   #add-playlist-button { display: none; }
   #add-playlist-button-mobile { display: inline-block; }
-
-  .discovery-container {
-    width: 300px;
-  }
-
-  #album-img {
-    width: 300px;
-    height: 300px;
-  }
 
   .playlist-container {
     width: 100%;

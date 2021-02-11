@@ -1,39 +1,62 @@
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useContext,
+  Fragment,
+} from 'react';
 import api from '../../services/api';
 import { UserContext } from '../../context/user';
-import './discovery.scss'
+import Player from '../../components/Player';
+import './discovery.scss';
+
+interface Image {
+  height: number;
+  url: string;
+  width: number;
+}
 
 interface Track {
-  name: string;
-  spotify_id: string;
   preview_url: string;
-  artists: object[];
-  album: object;
-};
+  album: {
+    images: Image[];
+  };
+}
 
-const Discovery: React.FC  = () => {
-
+const Discovery: React.FC = () => {
   const [track, setTrack] = useState<Track>();
+  const [trackColor, setTrackColor] = useState('');
   const { user } = useContext(UserContext);
 
   const fetchTrack = useCallback(async () => {
     const response = await api.get('/tracks/new');
     if (response.status === 200) {
-      const { track } = response.data;
-      setTrack(track);
+      const { track: fetchedTrack, colors } = response.data;
+      setTrack(fetchedTrack);
+      setTrackColor(colors);
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     fetchTrack();
-  },[user, fetchTrack])
+  }, [user, fetchTrack]);
 
   return (
-    <div className="track-container">
-      <span>{track && track.name}</span>
-    </div>
-  )
-}
+    <Fragment>
+      <div className="discovery-container">
+        <div
+          style={{
+            background: track
+              ? `url(${track.album.images[0].url}) 0 / cover fixed`
+              : '',
+          }}
+          id="bg-before"
+        ></div>
+        <div id="bg"></div>
+        {track && <Player track={track} color={trackColor} />}
+      </div>
+    </Fragment>
+  );
+};
 
 export default Discovery;
-
