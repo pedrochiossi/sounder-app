@@ -13,16 +13,16 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       color: '#FFF',
-      backgroundColor: '#000'
+      backgroundColor: '#000',
     },
     paper: {
       marginRight: theme.spacing(2),
     },
     menuItem: {
       '&:hover': {
-        backgroundColor: '#3a3939'
-      }
-    }
+        backgroundColor: '#3a3939',
+      },
+    },
   }),
 );
 
@@ -31,18 +31,20 @@ interface Props {
   triggerContent: React.ReactNode | HTMLElement;
 }
 
-
-const Dropdown: React.FC<Props> = ({ children, triggerContent }) => {
+const Dropdown: React.FC<Props> = ({ children, triggerContent }: Props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
       return;
     }
 
@@ -66,10 +68,12 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }) => {
     prevOpen.current = open;
   }, [open]);
 
-  const listContent = Children.map(children, (child) => {
+  const listContent = Children.map(children, child => {
     return (
-      <MenuItem className={classes.menuItem} onClick={handleClose}>{child}</MenuItem>
-    )
+      <MenuItem className={classes.menuItem} onClick={handleClose}>
+        {child}
+      </MenuItem>
+    );
   });
 
   return (
@@ -82,12 +86,23 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }) => {
       >
         {triggerContent}
       </Button>
-      <Popper open={open} anchorEl={anchorRef.current} placement="bottom-end" role={undefined} transition disablePortal>
+      <Popper
+        open={open}
+        anchorEl={anchorRef.current}
+        placement="bottom-end"
+        role={undefined}
+        transition
+        disablePortal
+      >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={300}>
-            <Paper classes={{root: classes.root }}>
+            <Paper classes={{ root: classes.root }}>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList autoFocusItem={open} id="menu-list-fade" onKeyDown={handleListKeyDown}>
+                <MenuList
+                  autoFocusItem={open}
+                  id="menu-list-fade"
+                  onKeyDown={handleListKeyDown}
+                >
                   {listContent}
                 </MenuList>
               </ClickAwayListener>
@@ -96,8 +111,7 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }) => {
         )}
       </Popper>
     </div>
-  )
-
-}
+  );
+};
 
 export default Dropdown;
