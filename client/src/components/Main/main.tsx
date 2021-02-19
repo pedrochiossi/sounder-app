@@ -1,26 +1,22 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import Header from '../Header';
-import { UserContext } from '../../context/user';
+import { useUserContext } from '../../context/user';
+import Loader from '../Loader';
 
 interface Props {
   children: React.ReactNode;
 }
 
 const Main: React.FC<Props> = ({ children }: Props) => {
-  const { user, fetchData, isSignedIn } = useContext(UserContext);
-
-  const { name, imageURL } = user;
-
-  useEffect(() => {
-    if (Object.keys(user).length === 0) {
-      fetchData();
-    }
-  }, [user, fetchData]);
+  const { loading } = useUserContext();
 
   return (
     <main className="bg-dark">
-      {isSignedIn && <Header name={name} imageURL={imageURL} />}
-      <div className="main-content">{children}</div>
+      <Header />
+      <div className="main-content">
+        {loading && <Loader />}
+        {children}
+      </div>
     </main>
   );
 };

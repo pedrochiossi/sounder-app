@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 
@@ -12,10 +13,13 @@ api.interceptors.response.use(
     return response;
   },
   async error => {
-    if (error.response.statusCode === 401) {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
       await api.post('/auth/refresh');
+      return api(originalRequest);
     }
-    Promise.reject(error);
+    return Promise.reject(error);
   },
 );
 
