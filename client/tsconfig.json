@@ -2,10 +2,14 @@
   "compilerOptions": {
     "target": "ES2016",
     "module": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "declaration": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -22,6 +26,12 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true
   },
-  "include": ["src"],
-  "exclude": ["dist", "node_modules", "build"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "build"
+  ]
 }
