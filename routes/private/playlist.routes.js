@@ -16,29 +16,41 @@ function ensureAuthenticated(req, res, next) {
   throw new AppError('Unauthorized', 403);
 };
 
-router.post('/spotify/add', ensureAuthenticated, async (req, res) => {
-  const playlistName = req.body.playlist_name;
-  const likedTracks = await trackController.getLikedTracks(req.user);
-  const spotifyTrackIds = likedTracks.map(track => `spotify:track:${track.spotify_id}`);
-  const trackIds = likedTracks.map(track => track._id);
-  const newPlaylist = await playlistController.addToSpotify(
-    req.user, 
-    spotifyTrackIds, 
-    playlistName
-  );
-  await playlistController.savePlaylistFromSpotify(req.user, newPlaylist, trackIds);
-  return res.status(200).json({ success: true, message: 'Playlist added to spotify' })
+router.post('/spotify/add', ensureAuthenticated, async (req, res, next) => {
+  try {
+    const playlistName = req.body.playlist_name;
+    const likedTracks = await trackController.getLikedTracks(req.user);
+    const spotifyTrackIds = likedTracks.map(track => `spotify:track:${track.spotify_id}`);
+    const trackIds = likedTracks.map(track => track._id);
+    const newPlaylist = await playlistController.addToSpotify(
+      req.user,
+      spotifyTrackIds,
+      playlistName
+    );
+    await playlistController.savePlaylistFromSpotify(req.user, newPlaylist, trackIds);
+    return res.status(200).json({ success: true, message: 'Playlist added to spotify' })
+  } catch(error) {
+    next(error);
+  }
 });
 
-router.get('/', ensureAuthenticated, async (req, res) => {
-  const playlists = await playlistController.getPlaylists(req.user);
-  res.status(200).json({ playlists });
+router.get('/', ensureAuthenticated, async (req, res, next) => {
+  try {
+    const playlists = await playlistController.getPlaylists(req.user);
+    res.status(200).json({ playlists });
+  } catch(error) {
+    next(error);
+  }
 });
 
-router.post('/delete', ensureAuthenticated, async (req, res) => {
-  const { playlistId } = req.body;
-  await playlistController.removePlaylist(playlistId);
-  return res.status(200).json({success: true, message: 'Playlist deleted'})
+router.post('/delete', ensureAuthenticated, async (req, res, next) => {
+  try {
+    const { playlistId } = req.body;
+    await playlistController.removePlaylist(playlistId);
+    return res.status(200).json({success: true, message: 'Playlist deleted'})
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
