@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
@@ -7,20 +7,15 @@ import { Link } from 'react-router-dom';
 import Dropdown from '../Dropdown';
 import logo from '../../Assets/images/sounder_app_logo.png';
 import './header.scss';
-import { UserContext } from '../../context/user';
+import { useUserContext } from '../../context/user';
 
-interface UserProps {
-  name: string;
-  imageURL: string;
-}
+const Header: React.FC = () => {
+  const { logout, isSignedIn, user } = useUserContext();
 
-const Header: React.FC<UserProps> = ({ name, imageURL }: UserProps) => {
-  const { logout } = useContext(UserContext);
-
-  return (
+  return isSignedIn ? (
     <nav className="navbar-container">
       <div className="list-menu-item">
-        <Link to="/">
+        <Link to="/discovery">
           <img className="icon-gap" src={logo} alt="logo" />
           Sounder
         </Link>
@@ -42,8 +37,8 @@ const Header: React.FC<UserProps> = ({ name, imageURL }: UserProps) => {
           <Dropdown
             triggerContent={
               <>
-                <img className="icon-gap" src={imageURL} alt="user" />
-                {name}
+                <img className="icon-gap" src={user?.imageURL} alt="user" />
+                {user?.name}
               </>
             }
           >
@@ -58,7 +53,11 @@ const Header: React.FC<UserProps> = ({ name, imageURL }: UserProps) => {
           triggerContent={
             <>
               <MenuIcon />
-              <img className="icon-gap img-avatar" src={imageURL} alt="user" />
+              <img
+                className="icon-gap img-avatar"
+                src={user?.imageURL}
+                alt="user"
+              />
             </>
           }
         >
@@ -72,12 +71,12 @@ const Header: React.FC<UserProps> = ({ name, imageURL }: UserProps) => {
           </Link>
           <button className="dropdown-link" onClick={logout}>
             <PersonOutlineIcon className="icon-gap" />
-            {`Logout of ${name}`}
+            {`Logout of ${user?.name}`}
           </button>
         </Dropdown>
       </div>
     </nav>
-  );
+  ) : null;
 };
 
 export default Header;

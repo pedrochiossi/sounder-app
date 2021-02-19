@@ -15,13 +15,20 @@ interface Image {
   width: number;
 }
 
+interface Artist {
+  name: string;
+}
+
 interface Props {
   color: string;
   track: {
     preview_url: string;
     album: {
+      name: string;
       images: Image[];
     };
+    name: string;
+    artists: Artist[];
   };
 }
 
@@ -72,6 +79,11 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
     }
   }, [restartAnimation]);
 
+  useEffect(() => {
+    setAnimationPlayState('paused');
+    setRestartAnimation(true);
+  }, [track]);
+
   return (
     <Fragment>
       <div className="image-container">
@@ -83,6 +95,7 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
           <PauseIcon style={{ color: 'white', fontSize: 100 }} />
         </div>
         <div id="progress">
+          <div className={restartAnimation ? '' : 'hidden'} />
           {!restartAnimation && (
             <div
               ref={progressBarRef}
@@ -90,6 +103,12 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
               style={{ backgroundColor: `rgb(${color})`, animationPlayState }}
             />
           )}
+        </div>
+        <div className="song-info">
+          <span className="song">{track.name}</span>
+          <span className="artist">
+            {track.artists[0].name} - {track.album.name}
+          </span>
         </div>
         <div>
           <audio src={track.preview_url} onEnded={handleEnded} ref={audioRef} />

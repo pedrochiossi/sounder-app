@@ -62,7 +62,7 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }: Props) => {
   const prevOpen = React.useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
+      anchorRef?.current?.focus();
     }
 
     prevOpen.current = open;
@@ -83,6 +83,7 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }: Props) => {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
+        disableTouchRipple={true}
       >
         {triggerContent}
       </Button>
