@@ -42,7 +42,7 @@ const Header: React.FC = () => {
               </>
             }
           >
-            <button className="dropdown-link" onClick={logout}>
+            <button type="button" className="dropdown-link" onClick={logout}>
               Logout
             </button>
           </Dropdown>
@@ -69,7 +69,7 @@ const Header: React.FC = () => {
             <MusicNoteIcon className="icon-gap" />
             Liked Tracks
           </Link>
-          <button className="dropdown-link" onClick={logout}>
+          <button type="button" className="dropdown-link" onClick={logout}>
             <PersonOutlineIcon className="icon-gap" />
             {`Logout of ${user?.name}`}
           </button>

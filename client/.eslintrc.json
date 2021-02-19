@@ -6,7 +6,7 @@
     },
     "extends": [
         "react-app",
-        "airbnb-typescript/base",
+        "airbnb-typescript",
         "prettier",
         "prettier/react",
         "plugin:@typescript-eslint/recommended"
@@ -18,7 +18,7 @@
         },
         "ecmaVersion": 2018,
         "sourceType": "module",
-        "project": "./client/tsconfig.json"
+        "project": "./tsconfig.json"
     },
     "plugins": [
         "prettier",
@@ -29,6 +29,7 @@
       "@typescript-eslint/no-use-before-define": ["error"],
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      "react/jsx-props-no-spreading": "off",
       "import/prefer-default-export": "off",
       "react/jsx-filename-extension": [1, { "extensions": [ ".tsx"] }],
       "camelcase": "off",

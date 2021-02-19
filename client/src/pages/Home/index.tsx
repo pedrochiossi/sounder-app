@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   };
 
   return isSignedIn ? (
-    <Redirect to={'/discovery'} />
+    <Redirect to="/discovery" />
   ) : (
     <section className="bg-dark home-section">
       <div className="home-container">

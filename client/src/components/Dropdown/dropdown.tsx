@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, Children } from 'react';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -68,13 +69,11 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }: Props) => {
     prevOpen.current = open;
   }, [open]);
 
-  const listContent = Children.map(children, child => {
-    return (
-      <MenuItem className={classes.menuItem} onClick={handleClose}>
-        {child}
-      </MenuItem>
-    );
-  });
+  const listContent = Children.map(children, child => (
+    <MenuItem className={classes.menuItem} onClick={handleClose}>
+      {child}
+    </MenuItem>
+  ));
 
   return (
     <div className={classes.root}>
@@ -83,7 +82,7 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }: Props) => {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        disableTouchRipple={true}
+        disableTouchRipple
       >
         {triggerContent}
       </Button>

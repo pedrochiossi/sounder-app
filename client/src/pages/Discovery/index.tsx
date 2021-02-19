@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState, useCallback, Fragment } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import ClearIcon from '@material-ui/icons/Clear';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Fab from '@material-ui/core/Fab';
@@ -87,7 +87,7 @@ const Discovery: React.FC = () => {
   }, [user, fetchTrack]);
 
   return (
-    <Fragment>
+    <>
       <div
         style={{
           background: track
@@ -95,12 +95,12 @@ const Discovery: React.FC = () => {
             : '',
         }}
         id="bg-before"
-      ></div>
-      <div id="bg"></div>
+      />
+      <div id="bg" />
       <div className="discovery-container">
         {loading && <Loader />}
         {track && (
-          <Fragment>
+          <>
             <Player track={track} color={trackColor} />
             <div className="buttons-container">
               <Fab
@@ -118,10 +118,10 @@ const Discovery: React.FC = () => {
                 <FavoriteIcon className={classes.icons} />
               </Fab>
             </div>
-          </Fragment>
+          </>
         )}
       </div>
-    </Fragment>
+    </>
   );
 };
 

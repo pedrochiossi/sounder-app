@@ -1,10 +1,5 @@
-import React, {
-  useRef,
-  Fragment,
-  useCallback,
-  useState,
-  useEffect,
-} from 'react';
+/* eslint-disable jsx-a11y/media-has-caption */
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import './player.scss';
@@ -85,9 +80,20 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
   }, [track]);
 
   return (
-    <Fragment>
+    <>
       <div className="image-container">
-        <img className="album-img" src={images[0].url} onClick={playPause} />
+        <div
+          onClick={playPause}
+          role="button"
+          tabIndex={0}
+          onKeyDown={e => e.key === 'Enter' && playPause}
+        >
+          <img
+            className="album-img"
+            src={images[0].url}
+            alt={track.album.name}
+          />
+        </div>
         <div className={`centered ${playIconHidden ? 'hidden' : ''}`}>
           <PlayArrowIcon style={{ color: 'white', fontSize: 100 }} />
         </div>
@@ -114,7 +120,7 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
           <audio src={track.preview_url} onEnded={handleEnded} ref={audioRef} />
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
