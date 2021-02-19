@@ -1,23 +1,23 @@
-import React, { useState, useContext } from 'react';
-import { SvgIcon, CircularProgress } from '@material-ui/core';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { UserContext } from '../../context/user';
+import { SvgIcon, CircularProgress } from '@material-ui/core';
 import logo from '../../Assets/images/sounder_app_logo.png';
 import sounderPreview from '../../Assets/images/sounder-preview-img.png';
 import { ReactComponent as SpotifyIcon } from '../../Assets/images/spotify.svg';
+import { useUserContext } from '../../context/user';
 import './home.scss';
 
 const Home: React.FC = () => {
   const [loadingSpotify, setLoadingSpotify] = useState(false);
-  const { isSignedIn } = useContext(UserContext);
+  const { isSignedIn } = useUserContext();
   const handleClick = () => {
     setLoadingSpotify(true);
   };
 
   return isSignedIn ? (
-    <Redirect to="/discovery" />
+    <Redirect to={'/discovery'} />
   ) : (
-    <section className="bg-dark home-small">
+    <section className="bg-dark home-section">
       <div className="home-container">
         <div className="info-wrap">
           <div className="logo">
