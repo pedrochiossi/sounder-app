@@ -5,8 +5,10 @@
         "browser": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "plugin:prettier/recommended",
+        "react-app",
+        "airbnb-typescript/base",
+        "prettier",
+        "prettier/react",
         "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
@@ -15,11 +17,10 @@
             "jsx": true
         },
         "ecmaVersion": 2018,
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": "./client/tsconfig.json"
     },
     "plugins": [
-        "react",
-        "react-hooks",
         "prettier",
         "@typescript-eslint"
     ],
