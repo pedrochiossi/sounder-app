@@ -1,80 +1,76 @@
 const SpotifyWebApi = require('spotify-web-api-node');
 const Playlist = require('../models/Playlist');
-const trackController = require('./track.controller');
+const AppError = require('../errors/AppError');
 
-const spotifyApi = new SpotifyWebApi({});
-
-function addAccessToken(token) {
-  spotifyApi.setAccessToken(token);
-}
-
-function generatePlaylistImages(items) {
-  const imgURLs = [];
-
-  for (let i = 0; i < 4; i += 1) {
-    imgURLs[i] = items[i].track.album.images[1].url;
-  };
-
-  return imgURLs;
-}
-
-async function savePlaylistFromSpotify(user, playlist) {
-  const playlistFromSpotify = await spotifyApi.getPlaylist(playlist.body.id);
-
-  const { items } = playlistFromSpotify.body.tracks;
-  const images = generatePlaylistImages(items);
-
-  const mongoTrackIds = await trackController.getLikedTrackIds(user);
-  const date = new Date();
-
-  try {
-    await Playlist.create({
-      tracks: mongoTrackIds,
-      name: playlistFromSpotify.body.name,
-      user: user._id,
-      created_at: date,
-      spotify_id: playlist.body.id,
-      images
-    });
-  } catch (err) {
-    throw err;
+class PlaylistController {
+  constructor() {
+    this.api = new SpotifyWebApi({});
   }
 
-  await trackController.updateInPlaylist(mongoTrackIds);
-}
-
-async function addToSpotify(user, spotifyTracksIdArray, playlistName) {
-  try {
-    const playlistInSpotify = await spotifyApi.createPlaylist(user.spotifyId, playlistName, { public: false });
-    await spotifyApi.addTracksToPlaylist(playlistInSpotify.body.id, spotifyTracksIdArray);
-    await savePlaylistFromSpotify(user, playlistInSpotify);
-  } catch (err) {
-    throw err;
+  addAccessToken(token) {
+    this.api.setAccessToken(token);
   }
-}
 
-async function getPlaylists(user) {
-  try {
-    const playlists = await Playlist.find({ user: user._id }).sort({ created_at: -1 });
-    return playlists;
-  } catch (err) {
-    throw err;
+  generatePlaylistImages(items) {
+    const imgURLs = [];
+    for (let i = 0; i < 4; i += 1) {
+      imgURLs[i] = items[i].track.album.images[1].url;
+    };
+    return imgURLs;
   }
-}
 
-async function removePlaylist(id) {
-  try {
-    const updatedPlaylist = await Playlist.findOneAndRemove({ _id: id });
-    return updatedPlaylist;
-  } catch (err) {
-    throw err;
+  async savePlaylistFromSpotify(user, playlist, tracks) {
+    const playlistFromSpotify = await this.api.getPlaylist(playlist.body.id);
+  
+    const { items } = playlistFromSpotify.body.tracks;
+    const images = this.generatePlaylistImages(items);
+    const date = new Date();
+  
+    try {
+      await Playlist.create({
+        tracks,
+        name: playlistFromSpotify.body.name,
+        user: user._id,
+        created_at: date,
+        spotify_id: playlist.body.id,
+        images
+      });
+    } catch (err) {
+      throw new AppError(err.message, err.statusCode);;
+    }
   }
-}
 
-module.exports = {
-  addAccessToken,
-  addToSpotify,
-  savePlaylistFromSpotify,
-  getPlaylists,
-  removePlaylist,
+  async addToSpotify(user, spotifyTracks, playlistName) {
+    try {
+      const playlist = await this.api.createPlaylist(
+        user.spotifyId,
+        playlistName, 
+        { public: false }
+      );
+      await this.api.addTracksToPlaylist(playlist.body.id, spotifyTracks);
+      return playlist;
+    } catch (err) {
+      throw new AppError(err.message, err.statusCode);;
+    }
+  }
+
+  async getPlaylists(user) {
+    try {
+      const playlists = await Playlist.find({ user: user._id }).sort({ created_at: -1 });
+      return playlists;
+    } catch (err) {
+      throw new AppError(err.message, err.statusCode);;
+    }
+  }
+
+  async removePlaylist(id) {
+    try {
+      const updatedPlaylist = await Playlist.findOneAndRemove({ _id: id });
+      return updatedPlaylist;
+    } catch (err) {
+      throw new AppError(err.message, err.statusCode);;
+    }
+  }
 };
+
+module.exports = PlaylistController;

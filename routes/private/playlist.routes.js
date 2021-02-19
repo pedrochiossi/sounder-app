@@ -1,57 +1,56 @@
 const express = require('express');
-const playlistController = require('../../controllers/playlist.controller.js');
+const PlaylistController = require('../../controllers/playlist.controller.js');
+const TrackController = require('../../controllers/track.controller.js');
+const AppError = require('../../errors/AppError');
+
 
 const router = express.Router();
+const playlistController = new PlaylistController();
+const trackController = new TrackController();
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     playlistController.addAccessToken(req.user.access_token);
     return next();
   }
-  return res.status(403).json({error: 'Unauthorized' });
+  throw new AppError('Unauthorized', 403);
 };
 
-
-router.post('/spotify/add', ensureAuthenticated, async (req, res) => {
-  const playlistName = req.body.playlist_name;
+router.post('/spotify/add', ensureAuthenticated, async (req, res, next) => {
   try {
-    const spotifyTracksIdArray = await trackController.getLikedSpotifyTrackIds(req.user);
-    await playlistController.addToSpotify(req.user, spotifyTracksIdArray, playlistName);
+    const playlistName = req.body.playlist_name;
+    const likedTracks = await trackController.getLikedTracks(req.user);
+    const spotifyTrackIds = likedTracks.map(track => `spotify:track:${track.spotify_id}`);
+    const trackIds = likedTracks.map(track => track._id);
+    const newPlaylist = await playlistController.addToSpotify(
+      req.user,
+      spotifyTrackIds,
+      playlistName
+    );
+    await playlistController.savePlaylistFromSpotify(req.user, newPlaylist, trackIds);
     return res.status(200).json({ success: true, message: 'Playlist added to spotify' })
-  } catch (err) {
-    if (err.statusCode === 401) {
-     return res.status(401).json({error: 'acess token expired' });
-    }
-    return res.status(400).json({error: err.message})
+  } catch(error) {
+    next(error);
   }
 });
 
-
-router.get('/', ensureAuthenticated, async (req, res) => {
+router.get('/', ensureAuthenticated, async (req, res, next) => {
   try {
-    const plalistInfo = await playlistController.getPlaylists(req.user);
-    res.status(200).json({ playlists: plalistInfo });
-  } catch (error) {
-    if (error.statusCode === 401) {
-      return res.status(401).json({error: 'acess token expired ' });
-    }
-    return res.status(400).json({error: error.message})
+    const playlists = await playlistController.getPlaylists(req.user);
+    res.status(200).json({ playlists });
+  } catch(error) {
+    next(error);
   }
 });
 
-router.post('/delete', ensureAuthenticated, async (req, res) => {
-  const { playlistId } = req.body;
+router.post('/delete', ensureAuthenticated, async (req, res, next) => {
   try {
+    const { playlistId } = req.body;
     await playlistController.removePlaylist(playlistId);
     return res.status(200).json({success: true, message: 'Playlist deleted'})
   } catch (error) {
-    if (error.statusCode === 401) {
-     return res.status(401).json({error: 'acess token expired' });
-    }
-    return res.status(404).json({ error });
+    next(error);
   }
 });
-
-
 
 module.exports = router;

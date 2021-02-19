@@ -1,0 +1,64 @@
+$skyBlue: #14BEF0;
+
+button {
+  color: white;
+}
+
+.dropdown-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: none;
+  background-color: transparent;
+}
+
+.navbar-container {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 99%;
+  height: 40px;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+
+  a, button, span {
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      text-decoration: none;
+      color: $skyBlue;
+    }
+  }
+}
+
+.list-menu-item {
+  a, button {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+  }
+
+  img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
+}
+
+.item-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 450px;
+  align-items: center;
+}
+
+.icon-gap {
+  padding: 0 10px;
+}
