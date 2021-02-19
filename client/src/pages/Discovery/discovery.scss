@@ -1,10 +1,22 @@
-.track-container {
+.discovery-container {
+  position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 70vh;
+  justify-content: center;
+  height: 100vh;
+}
 
-  span {
-    color: white;
+.buttons-container {
+  button {
+    width: 65px;
+    height: 65px;
+    &:hover, &:focus {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
   }
 }
