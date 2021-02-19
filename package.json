@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && yarn start",
     "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\"",
-    "heroku-postbuild": "cd client && yarn install --production=false && yarn build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "axios": "^0.21.1",
