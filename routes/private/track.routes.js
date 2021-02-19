@@ -11,7 +11,6 @@ function ensureAuthenticated(req, res, next) {
     trackController.addAccessToken(req.user.access_token);
     return next();
   }
-  res.redirect(`${process.env.CLIENT_URL}/`);
   throw new AppError('Unauthorized', 403);
 };
 
