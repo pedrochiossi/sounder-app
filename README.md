@@ -4,13 +4,10 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-
-
-
 <br />
 <p align="center">
   <a href="https://sounder-app.herokuapp.com">
-    <img src="client/public/images/sounder_app_logo.png" alt="Logo" width="80" height="80">
+    <img src="client/public/images/android-chrome-192x192.png" alt="Logo" width="80" height="80">
   </a>
   <h2 align="center">sounder-app</h2>
   
