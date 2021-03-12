@@ -27,10 +27,10 @@ const Home: React.FC = () => {
           <h2>A new way of discovering the song you love</h2>
           <p>
             With Sounder app you can quickly discover new songs based on your
-            Spotify liked tracks library. With an intuitive flow, you can hear
-            new recomendations and personalize it even more by liking or
-            disliking it. After that, just add it to a new playlist and listen
-            in your Spotify account.
+            Spotify saved tracks library. With an intuitive flow, you can hear
+            new recomendations and personalize them even more by giving a like
+            or dislike. You can also add your liked tracks to a new Spotify and
+            listen to them on your Spotify account.
           </p>
           <div className="img-wrap mobile-visible">
             <img src={sounderPreview} alt="Sounder" />

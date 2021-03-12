@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
+import { PlayArrow, Pause } from '@material-ui/icons';
 import './player.scss';
 
 interface Image {
@@ -81,7 +80,7 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
 
   return (
     <>
-      <div className="image-container">
+      <div className="player-container">
         <div
           onClick={playPause}
           role="button"
@@ -94,11 +93,11 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
             alt={track.album.name}
           />
         </div>
-        <div className={`centered ${playIconHidden ? 'hidden' : ''}`}>
-          <PlayArrowIcon style={{ color: 'white', fontSize: 100 }} />
+        <div className={`control ${playIconHidden ? 'hidden' : ''}`}>
+          <PlayArrow style={{ color: 'white', fontSize: 100 }} />
         </div>
-        <div className={`centered ${pauseIconHidden ? 'hidden' : ''}`}>
-          <PauseIcon style={{ color: 'white', fontSize: 100 }} />
+        <div className={`control ${pauseIconHidden ? 'hidden' : ''}`}>
+          <Pause style={{ color: 'white', fontSize: 100 }} />
         </div>
         <div id="progress">
           <div className={restartAnimation ? '' : 'hidden'} />

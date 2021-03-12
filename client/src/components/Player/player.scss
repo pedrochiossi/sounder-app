@@ -1,15 +1,20 @@
 $icon-size-md: 100px;
 
-.centered {
+.control {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(calc(50% - #{$icon-size-md}), calc(0% - #{$icon-size-md}/2));
+  transform: translate(calc(50% - #{$icon-size-md}), calc(-20% - #{$icon-size-md}/2));
+  cursor: pointer;
 }
 
 .album-img {
   width: 500px;
   height: 500px;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .artist,
@@ -28,6 +33,7 @@ $icon-size-md: 100px;
   color: #999;
   font-size: 12px;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .song-info {
@@ -54,9 +60,10 @@ $icon-size-md: 100px;
 }
 
 
-.image-container {
+.player-container {
   margin-top: 50px;
   position: relative;
+  max-width: 500px;
 }
 
 @keyframes progress-bar {
@@ -68,7 +75,24 @@ $icon-size-md: 100px;
   }
 }
 
+@media (max-width: 1440px) {
+
+  .player-container {
+    max-width: 400px;
+  }
+
+  .album-img {
+    height: 400px;
+    width: 400px;
+  }
+}
+
 @media (max-width: 767px) {
+
+  .player-container {
+    max-width: 300px;
+  }
+
   .album-img {
     width: 300px;
     height: 300px;

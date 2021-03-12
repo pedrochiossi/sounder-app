@@ -48,7 +48,7 @@ class TrackController {
       throw new AppError(error.message, error.statusCode);;
     }
   }
-  
+
   async saveTrack(track, user) {
     const date = new Date();
     try {
@@ -110,9 +110,18 @@ class TrackController {
   async addTrackToSpotify(idArray) {
     try {
       await this.api.addToMySavedTracks(idArray);
+      await Track.findOneAndUpdate({ spotify_id: idArray[0] }, { savedOnSpotify: true });
     } catch (error) {
-      console.log(error);
-      throw new AppError(error.message, error.statusCode);;
+      throw new AppError(error.message, error.statusCode);
+    }
+  }
+
+  async removeTrackFromSpotify(idArray) {
+    try {
+      await this.api.removeFromMySavedTracks(idArray)
+      await Track.findOneAndUpdate({ spotify_id: idArray[0]}, { savedOnSpotify: false });
+    } catch (error) {
+      throw new AppError(error.message, error.statusCode);
     }
   }
 
