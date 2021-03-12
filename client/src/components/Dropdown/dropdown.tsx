@@ -1,11 +1,14 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, Children } from 'react';
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  Fade,
+  Paper,
+  Popper,
+  MenuItem,
+  MenuList,
+} from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Fade from '@material-ui/core/Fade';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -68,13 +71,11 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }: Props) => {
     prevOpen.current = open;
   }, [open]);
 
-  const listContent = Children.map(children, child => {
-    return (
-      <MenuItem className={classes.menuItem} onClick={handleClose}>
-        {child}
-      </MenuItem>
-    );
-  });
+  const listContent = Children.map(children, child => (
+    <MenuItem className={classes.menuItem} onClick={handleClose}>
+      {child}
+    </MenuItem>
+  ));
 
   return (
     <div className={classes.root}>
@@ -83,7 +84,7 @@ const Dropdown: React.FC<Props> = ({ children, triggerContent }: Props) => {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        disableTouchRipple={true}
+        disableTouchRipple
       >
         {triggerContent}
       </Button>

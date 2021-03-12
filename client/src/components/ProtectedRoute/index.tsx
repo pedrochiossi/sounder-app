@@ -17,7 +17,7 @@ const ProtectedRoute: React.FC<Props> = ({
     <Route
       {...rest}
       render={props =>
-        isSignedIn ? <Component {...props} /> : <Redirect to={'/'} />
+        isSignedIn ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );

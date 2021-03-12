@@ -1,8 +1,5 @@
 import React from 'react';
-import QueueMusicIcon from '@material-ui/icons/QueueMusic';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import MenuIcon from '@material-ui/icons/Menu';
+import { QueueMusic, MusicNote, PersonOutline, Menu } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import Dropdown from '../Dropdown';
 import logo from '../../Assets/images/sounder_app_logo.png';
@@ -23,13 +20,13 @@ const Header: React.FC = () => {
       <div className="item-menu w3-hide-small">
         <div className="list-menu-item">
           <Link to="/playlists">
-            <QueueMusicIcon />
+            <QueueMusic />
             Playlists
           </Link>
         </div>
         <div className="list-menu-item">
           <Link to="/tracks">
-            <MusicNoteIcon />
+            <MusicNote />
             Liked Tracks
           </Link>
         </div>
@@ -42,7 +39,7 @@ const Header: React.FC = () => {
               </>
             }
           >
-            <button className="dropdown-link" onClick={logout}>
+            <button type="button" className="dropdown-link" onClick={logout}>
               Logout
             </button>
           </Dropdown>
@@ -52,7 +49,7 @@ const Header: React.FC = () => {
         <Dropdown
           triggerContent={
             <>
-              <MenuIcon />
+              <Menu />
               <img
                 className="icon-gap img-avatar"
                 src={user?.imageURL}
@@ -62,15 +59,15 @@ const Header: React.FC = () => {
           }
         >
           <Link className="dropdown-link" to="/playlists">
-            <QueueMusicIcon className="icon-gap" />
+            <QueueMusic className="icon-gap" />
             Playlists
           </Link>
           <Link className="dropdown-link" to="/tracks">
-            <MusicNoteIcon className="icon-gap" />
+            <MusicNote className="icon-gap" />
             Liked Tracks
           </Link>
-          <button className="dropdown-link" onClick={logout}>
-            <PersonOutlineIcon className="icon-gap" />
+          <button type="button" className="dropdown-link" onClick={logout}>
+            <PersonOutline className="icon-gap" />
             {`Logout of ${user?.name}`}
           </button>
         </Dropdown>

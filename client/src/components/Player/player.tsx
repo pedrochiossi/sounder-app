@@ -1,12 +1,6 @@
-import React, {
-  useRef,
-  Fragment,
-  useCallback,
-  useState,
-  useEffect,
-} from 'react';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
+/* eslint-disable jsx-a11y/media-has-caption */
+import React, { useRef, useCallback, useState, useEffect } from 'react';
+import { PlayArrow, Pause } from '@material-ui/icons';
 import './player.scss';
 
 interface Image {
@@ -85,14 +79,25 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
   }, [track]);
 
   return (
-    <Fragment>
-      <div className="image-container">
-        <img className="album-img" src={images[0].url} onClick={playPause} />
-        <div className={`centered ${playIconHidden ? 'hidden' : ''}`}>
-          <PlayArrowIcon style={{ color: 'white', fontSize: 100 }} />
+    <>
+      <div className="player-container">
+        <div
+          onClick={playPause}
+          role="button"
+          tabIndex={0}
+          onKeyDown={e => e.key === 'Enter' && playPause}
+        >
+          <img
+            className="album-img"
+            src={images[0].url}
+            alt={track.album.name}
+          />
         </div>
-        <div className={`centered ${pauseIconHidden ? 'hidden' : ''}`}>
-          <PauseIcon style={{ color: 'white', fontSize: 100 }} />
+        <div className={`control ${playIconHidden ? 'hidden' : ''}`}>
+          <PlayArrow style={{ color: 'white', fontSize: 100 }} />
+        </div>
+        <div className={`control ${pauseIconHidden ? 'hidden' : ''}`}>
+          <Pause style={{ color: 'white', fontSize: 100 }} />
         </div>
         <div id="progress">
           <div className={restartAnimation ? '' : 'hidden'} />
@@ -114,7 +119,7 @@ const Player: React.FC<Props> = ({ color, track }: Props) => {
           <audio src={track.preview_url} onEnded={handleEnded} ref={audioRef} />
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

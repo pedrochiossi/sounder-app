@@ -69,6 +69,7 @@ $likegreen: #0dd30d;
 
   h1 {
     font-size: 62px;
+    color: $skyBlue;
   }
 
   .logo {
@@ -104,10 +105,14 @@ $likegreen: #0dd30d;
     .info-wrap {
       width: 100%;
       text-align: center;
+      .logo {
+        justify-content: center;
+      }
     }
 
     .img-wrap {
       margin: 0px auto;
+      margin-top: 20px;
       &.desktop-visible {
         img {
           width: 400px;

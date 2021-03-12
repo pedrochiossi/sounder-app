@@ -50,7 +50,7 @@ router.get('/liked', ensureAuthenticated, async (req, res, next) => {
   }
 });
 
-router.post('/add-to-spotify', ensureAuthenticated, async (req, res, next) => {
+router.post('/spotify/like', ensureAuthenticated, async (req, res, next) => {
   try {
     const { spotifyId } = req.body;
     await trackController.addTrackToSpotify([spotifyId]);
@@ -59,5 +59,15 @@ router.post('/add-to-spotify', ensureAuthenticated, async (req, res, next) => {
     next(error);
   }
 });
+
+router.post('/spotify/dislike', ensureAuthenticated, async (req, res, next) => {
+  try {
+    const { spotifyId } = req.body;
+    await trackController.removeTrackFromSpotify([spotifyId]);
+    return res.status(200).json({success: true, message: 'Track removed from liked songs playlist' })
+  } catch (error) {
+    next(error);
+  }
+})
 
 module.exports = router;

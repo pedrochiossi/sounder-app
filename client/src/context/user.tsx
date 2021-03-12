@@ -67,6 +67,7 @@ export const UserProvider: React.FC<ProviderProps> = ({
       const response = await api.get('/user');
       if (response.status === 200) {
         const {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           access_token,
           name,
           imageURL,

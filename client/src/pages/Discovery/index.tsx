@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState, useCallback, Fragment } from 'react';
-import ClearIcon from '@material-ui/icons/Clear';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Fab from '@material-ui/core/Fab';
+import React, { useEffect, useState, useCallback } from 'react';
+import { Helmet } from 'react-helmet';
+import { Clear, Favorite } from '@material-ui/icons';
+import { Fab } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import api from '../../services/api';
 import { useUserContext } from '../../context/user';
@@ -87,7 +87,10 @@ const Discovery: React.FC = () => {
   }, [user, fetchTrack]);
 
   return (
-    <Fragment>
+    <>
+      <Helmet>
+        <title>Discovery</title>
+      </Helmet>
       <div
         style={{
           background: track
@@ -95,12 +98,12 @@ const Discovery: React.FC = () => {
             : '',
         }}
         id="bg-before"
-      ></div>
-      <div id="bg"></div>
+      />
+      <div id="bg" />
       <div className="discovery-container">
         {loading && <Loader />}
         {track && (
-          <Fragment>
+          <>
             <Player track={track} color={trackColor} />
             <div className="buttons-container">
               <Fab
@@ -108,20 +111,20 @@ const Discovery: React.FC = () => {
                 onClick={() => setLiked('false')}
                 size="large"
               >
-                <ClearIcon className={classes.icons} />
+                <Clear className={classes.icons} />
               </Fab>
               <Fab
                 className={classes.likeFab}
                 onClick={() => setLiked('true')}
                 size="large"
               >
-                <FavoriteIcon className={classes.icons} />
+                <Favorite className={classes.icons} />
               </Fab>
             </div>
-          </Fragment>
+          </>
         )}
       </div>
-    </Fragment>
+    </>
   );
 };
 
