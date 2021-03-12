@@ -28,6 +28,7 @@ router.post('/spotify/add', ensureAuthenticated, async (req, res, next) => {
       playlistName
     );
     await playlistController.savePlaylistFromSpotify(req.user, newPlaylist, trackIds);
+    await trackController.updateInPlaylist(trackIds);
     return res.status(200).json({ success: true, message: 'Playlist added to spotify' })
   } catch(error) {
     next(error);

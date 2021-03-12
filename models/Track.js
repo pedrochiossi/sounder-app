@@ -16,6 +16,7 @@ const trackSchema = new Schema({
     default: null,
   },
   inPlaylist: { type: Boolean, default: false },
+  savedOnSpotify: { type: Boolean, default: false },
   created_at: { type: Date, default: Date.now() },
 });
 
