@@ -37,6 +37,7 @@ With an intuitive flow and a tinder-like interface, the user can hear new track 
 * [Spotify-Web-Api](https://developer.spotify.com/documentation/web-api/)
 * [Passport](http://www.passportjs.org)
 * [Mongodb](https://www.mongodb.com)
+* [React](https://reactjs.org/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -54,21 +55,27 @@ git clone https:://github.com/pedrochiossi/sounder-app.git
 ```sh
 npm install
 ```
-5. Create a `.env` file and enter your client ID and Client Secret as:
+or
+```sh
+yarn
+```
+5. Create a `.env` file and enter your spotify client ID and Client Secret, Callback URL as:
 ```
 APPKEY='ENTER YOUR CLIENT_ID'
 APPSECRET='ENTER YOUR CLIENT_SECRET'
+CALLBACKURI='ENTER SPOTIFY CALLBACK URL FOR AUTH'
 ```
 6. Enter a PORT and a mongodb URI in `.env` as:
 ```
 PORT=8888
 MONGODB_URI=mongodb://localhost/sounderApp
+CLIENT_URL=http://localhost:3000
 ```
 ## Running
 
-* On development, run `npm run dev`.
-
-* On production, run `npm start`.
+* On development, run `npm run dev` or `yarn dev`.
+* On production, make sure you build react with `cd client && yarn build`  
+* and run `npm start` or `yarn start`.
 
 <!-- USAGE EXAMPLES -->
 ## How to use
@@ -84,7 +91,7 @@ MONGODB_URI=mongodb://localhost/sounderApp
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [W3.css](https://www.w3schools.com/w3css/)
+* [Material-UI](https://material-ui.com/)
 * [color-thief](https://github.com/lokesh/color-thief)
 * [freefrontend](https://freefrontend.com/css-music-players/)
 * [spotify-web-api-node](https://github.com/thelinmichael/spotify-web-api-node)
