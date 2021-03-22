@@ -6,7 +6,7 @@
 
 <br />
 <p align="center">
-  <a href="https://sounder-app.herokuapp.com">
+  <a href="https://sounder-app.com">
     <img src="client/public/images/android-chrome-192x192.png" alt="Logo" width="80" height="80">
   </a>
   <h2 align="center">sounder-app</h2>
@@ -14,7 +14,7 @@
   <p align="center">
    An awesome song-discovery and playlist-generator web application!
    <br />
-    <a href="https://sounder-app.herokuapp.com">View Demo</a>
+    <a href="https://sounder-app.com">View Demo</a>
     ·
     <a href="https://github.com/pedrochiossi/sounder-app/issues">Report Bug</a>
     ·
