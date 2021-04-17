@@ -7,6 +7,10 @@ import React, {
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../services/api';
+import {
+  getWithExpiry,
+  setWithExpiry,
+} from '../helpers/localStorageWithExpiry';
 
 interface UserData {
   spotifyId: string;
@@ -22,7 +26,6 @@ interface UserContextData {
   user: UserData;
   loading: boolean;
 }
-
 interface ProviderProps {
   children: React.ReactNode;
 }
@@ -32,16 +35,15 @@ const UserContext = createContext<UserContextData>({} as UserContextData);
 export const UserProvider: React.FC<ProviderProps> = ({
   children,
 }: ProviderProps) => {
-  const [isSignedIn, setIsSignedIn] = useState(
-    !!localStorage.getItem('user_token'),
-  );
+  const [isSignedIn, setIsSignedIn] = useState(!!getWithExpiry('user_token'));
   const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState<UserData>(() => {
     const token = localStorage.getItem('user_token');
     const user = localStorage.getItem('user');
     if (token && user) {
-      return JSON.parse(user);
+      const { value } = JSON.parse(user);
+      return value;
     }
 
     return {} as UserData;
@@ -74,7 +76,7 @@ export const UserProvider: React.FC<ProviderProps> = ({
           spotifyId,
           premium,
         } = response.data;
-        localStorage.setItem('user_token', access_token);
+        setWithExpiry('user_token', { access_token }, 3600000 * 24 * 14);
         localStorage.setItem(
           'user',
           JSON.stringify({ name, imageURL, spotifyId, premium }),
