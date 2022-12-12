@@ -27,7 +27,7 @@
     "passport": "^0.4.1",
     "passport-spotify": "^1.1.0",
     "prettyjson": "^1.2.1",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "spotify-web-api-node": "^4.0.0"
   },
   "devDependencies": {
