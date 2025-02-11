@@ -67,7 +67,7 @@ const Discovery: React.FC = () => {
     setLoading(false);
   }, []);
 
-  const setLiked = useCallback(
+  const setLiked : (liked: string) => Promise<void> = useCallback(
     async liked => {
       if (!track) return;
       setLoading(true);

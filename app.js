@@ -5,7 +5,7 @@ const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const authRoutes = require('./routes/public/auth.routes');
@@ -21,11 +21,27 @@ mongoose
   .connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useFindAndModify: false,
   })
   .then((x) => {
     console.log(
       `Connected to Mongo! Database name: '${x.connections[0].name}'`
+    );
+
+    app.use(
+      session({
+        secret: 'basic-auth-secret',
+        cookie: {
+          maxAge: 3600000 * 24 * 14,
+          httpOnly: true,
+          sameSite: true,
+        },
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+          client: x.connection.getClient(),
+          ttl: 24 * 60 * 60, // 1 day
+        }),
+      })
     );
   })
   .catch((err) => {
@@ -38,22 +54,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(
-  session({
-    secret: 'basic-auth-secret',
-    cookie: {
-      maxAge: 3600000 * 24 * 14,
-      httpOnly: true,
-      sameSite: true,
-    },
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 24 * 60 * 60, // 1 day
-    }),
-  })
-);
+
 
 app.use(cors());
 app.use(passport.initialize());
