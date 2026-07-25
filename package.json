@@ -22,7 +22,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-session": "^1.17.1",
-    "mongoose": "^5.10.9",
+    "mongoose": "^6.13.10",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-spotify": "^1.1.0",
